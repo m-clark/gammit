@@ -1,0 +1,71 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# gammit
+
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.org/m-clark/gammit.svg?branch=master)](https://travis-ci.org/m-clark/gammit)
+
+[![Codecov test coverage](https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg)](https://codecov.io/gh/m-clark/gammit?branch=master)
+<!-- badges: end -->
+
+The goal of gammit is to provide a set of functions to aid using mgcv (possibly solely) for mixed models.
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("m-clark/gammit")
+```
+## Example
+
+This example demonstrates the summary function:
+
+```{r summary}
+library(mgcv); library(lme4); library(gammit)
+
+lmer_model = lmer(Reaction ~  Days + (1|Subject) + (0 + Days|Subject), data=sleepstudy)
+
+ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
+               data=sleepstudy,
+               method = 'REML')
+
+summary(lmer_model)
+
+
+summary_gamm(ga_model)
+```
+
+Extract the variance components.
+
+```{r extract_vc}
+VarCorr(lmer_model)
+
+
+extract_vc(ga_model)
+```
+
+
+Extract the random effects.
+
+```{r extract_ranef}
+ranef(lmer_model)
+
+
+extract_ranef(ga_model)
+
+data.frame(extract_ranef(ga_model))
+```

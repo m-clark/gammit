@@ -1,0 +1,26 @@
+Package: gammit
+Type: Package
+Title: Using Generalized Additive Mixed Models
+Version: 0.1.0
+Author: Micheal Clark
+Maintainer: Micheal Clark <micl@umich.edu>
+Description: The goal of gammit is to provide a set of functions to aid using mgcv (possibly solely) for mixed models.
+License: Apache License (>= 2.0)
+Encoding: UTF-8
+LazyData: true
+Depends:
+  R (>= 3.4.0)
+Imports:
+    mgcv,
+    rlang,
+    dplyr,
+    stringr,
+    tibble
+Suggests: 
+    lme4,
+    covr,
+    testthat
+Remotes:
+  m-clark/visibly
+RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
