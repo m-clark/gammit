@@ -19,6 +19,7 @@ Imports:
 Suggests: 
     lme4,
     covr,
+    knitr,
     testthat
 Remotes:
   m-clark/visibly
