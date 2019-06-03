@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Micheal Clark
 Maintainer: Micheal Clark <micl@umich.edu>
 Description: The goal of gammit is to provide a set of functions to aid using mgcv (possibly solely) for mixed models.
-License: Apache License (>= 2.0)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
