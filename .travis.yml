@@ -1,9 +1,25 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
+sudo: false
 cache: packages
 
+warnings_are_errors: false
+
+matrix:
+  include:
+  - r: 3.4.0
+  - r: release
+
+  allow_failures:
 
 
-  after_success:
-    - Rscript -e 'covr::codecov()'
+repos:
+  CRAN: https://cloud.r-project.org
+  ropensci: http://packages.ropensci.org
+
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'covr::codecov()'
