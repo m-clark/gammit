@@ -7,7 +7,8 @@
 
 [![Travis build
 status](https://travis-ci.org/m-clark/gammit.svg?branch=master)](https://travis-ci.org/m-clark/gammit)
-
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/m-clark/gammit?branch=master&svg=true)](https://ci.appveyor.com/project/m-clark/gammit)
 [![Codecov test
 coverage](https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg)](https://codecov.io/gh/m-clark/gammit?branch=master)
 <!-- badges: end -->
