@@ -157,7 +157,7 @@ extract_ranef(ga_model)
 #  8 Subject    -7.45   13.3 -33.5   18.6
 #  9 Subject     0.579  13.3 -25.4   26.6
 # 10 Subject    34.8    13.3   8.74  60.8
-# # ... with 26 more rows
+# # … with 26 more rows
 
 data.frame(extract_ranef(ga_model))
 #       component          re       se      lower       upper

@@ -11,7 +11,7 @@
 #' @examples
 #' library(mgcv); library(lme4)
 
-#' lmer_model = lmer(Reaction ~  Days + (Days|Subject), data=sleepstudy)
+#' lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
 #' ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
 #' data=sleepstudy,
 #' method = 'REML')
