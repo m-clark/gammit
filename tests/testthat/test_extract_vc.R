@@ -7,3 +7,33 @@ ga_model = mgcv::gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, b
 test_that('Works on single lme model', {
   expect_s3_class(extract_vc(ga_model), 'data.frame')
 })
+
+test_that('Takes tibble arg', {
+  expect_failure(
+    expect_s3_class(extract_vc(ga_model, tibble = FALSE), 'tibble')
+  )
+})
+
+
+
+
+
+# Test bam ----------------------------------------------------------------
+
+ba_model = mgcv::bam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
+                     data = lme4::sleepstudy,
+                     method = 'REML')
+
+ba_model_bin = mgcv::bam(Reaction > median(Reaction) ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
+                         data = lme4::sleepstudy,
+                         family = binomial,
+                         method = 'REML')
+
+
+test_that('Bam works on single cluster lme model', {
+  expect_s3_class(extract_vc(ba_model), 'data.frame')
+})
+
+test_that('Works on single cluster glme model', {
+  expect_s3_class(extract_vc(ba_model_bin), 'data.frame')
+})

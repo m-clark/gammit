@@ -6,10 +6,12 @@
 #' @param model The mgcv model
 #' @param re Which specific coefficients to extract. Currently not
 #'   implemented.
+#' @param tibble Return a tibble or standard default data.frame.  Default is
+#'   `TRUE`.
 #'
-#' @details Returns a data frame of the the `component` type, the estimated random effect `re`, and approximate `lower` and `upper` bounds assuming  `+- 1.96*se`.  Note that the standard errors are Bayesian estimates (see \code{\link{vcov.gam}}, specifically type `Vp`).
+#' @details Returns a data frame of the the `component` type, the estimated random effect `re`, the estimated `se`, and approximate `lower` and `upper` bounds assuming  `+- 1.96*se`.  Note that the standard errors are Bayesian estimates (see \code{\link{gamObject}}, specifically type `Vp`).
 #'
-#' @return A `tibble` (if possible) or data frame with the random effect, its
+#' @return A `tibble` (if `tibble = TRUE`) or data frame with the random effect, its
 #'   standard errror, and its lower and upper bounds. The bounds are based on a
 #'   simple normal approximation using the standard error.
 #'
@@ -31,15 +33,15 @@
 #' @importFrom stringr str_detect
 #'
 #' @export
-extract_ranef <- function(model, re = NULL) {
+extract_ranef <- function(model, re = NULL, tibble = TRUE) {
 
   gam_coef = stats::coef(model)
 
   # for later
-  if (!rlang::is_null(re)) {
-    stopifnot(rlang::is_character(re))
-    # ...
-  }
+  # if (!rlang::is_null(re)) {
+  #   stopifnot(rlang::is_character(re))
+  #   # ...
+  # }
 
   re0 = gam_coef[stringr::str_detect(names(gam_coef), pattern = '^s\\(')]
 
@@ -63,6 +65,6 @@ extract_ranef <- function(model, re = NULL) {
     upper = re0 + 1.96*gam_se
   )
 
-  if (rlang::is_installed('tibble')) tibble::as_tibble(re)
+  if (tibble) tibble::as_tibble(re)
   else re
 }

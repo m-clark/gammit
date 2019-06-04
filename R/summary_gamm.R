@@ -30,8 +30,7 @@ summary_gamm = function(model, digits=3) {
 
   summary_table = mgcv::summary.gam(model)$p.table
 
-  vc = extract_vc(model)
-
+  vc = extract_vc(model, tibble = FALSE)
   fe = data.frame(summary_table)
   names(fe) = colnames(summary_table)
 
@@ -39,13 +38,13 @@ summary_gamm = function(model, digits=3) {
   message("\nVariance components:\n")
   # for more consistency with fe table do digits - 1; Fix later to not use round
   # or signif digits
-  print(dplyr::mutate_if(vc, is.numeric, round, digits = digits-1))
+  print(dplyr::mutate_if(data.frame(vc), is.numeric, round, digits = digits-1))
 
   # fe part
   message("\n\nFixed Effects:\n")
   stats::printCoefmat(summary_table,
                       digits = digits,
-                      signif.stars = T,
+                      signif.stars = FALSE,
                       na.print = "NA")
 
   invisible(list(vc = vc,

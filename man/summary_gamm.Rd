@@ -25,7 +25,7 @@ but should work with just about any gam with a smooth term.
 }
 \examples{
 library(mgcv); library(lme4)
-lmer_model = lmer(Reaction ~  Days + (1|Subject) + (0 + Days|Subject), data=sleepstudy)
+lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
 ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
 data=sleepstudy,
 method = 'REML')

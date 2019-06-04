@@ -4,16 +4,19 @@
 \alias{extract_ranef}
 \title{Random effects for gam}
 \usage{
-extract_ranef(model, re = NULL)
+extract_ranef(model, re = NULL, tibble = TRUE)
 }
 \arguments{
 \item{model}{The mgcv model}
 
 \item{re}{Which specific coefficients to extract. Currently not
 implemented.}
+
+\item{tibble}{Return a tibble or standard default data.frame.  Default is
+\code{TRUE}.}
 }
 \value{
-A \code{tibble} (if possible) or data frame with the random effect, its
+A \code{tibble} (if \code{tibble = TRUE}) or data frame with the random effect, its
 standard errror, and its lower and upper bounds. The bounds are based on a
 simple normal approximation using the standard error.
 }
@@ -22,11 +25,11 @@ Extract what would be the random effects from a mixed model from
 a gam object.  Assumes an mgcv model of the form \code{gam(... + s(g, bs='re'))}.
 }
 \details{
-Returns a data frame of the the \code{component} type, the estimated random effect \code{re}, and approximate \code{lower} and \code{upper} bounds assuming  \code{+- 1.96*se}.  Note that the standard errors are Bayesian estimates (see \code{\link{vcov.gam}}, specifically type \code{Vp}).
+Returns a data frame of the the \code{component} type, the estimated random effect \code{re}, the estimated \code{se}, and approximate \code{lower} and \code{upper} bounds assuming  \code{+- 1.96*se}.  Note that the standard errors are Bayesian estimates (see \code{\link{gamObject}}, specifically type \code{Vp}).
 }
 \examples{
 library(mgcv); library(lme4)
-lmer_model = lmer(Reaction ~  Days + (1|Subject) + (0 + Days|Subject), data=sleepstudy)
+lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
 ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
 data=sleepstudy,
 method = 'REML')

@@ -4,27 +4,43 @@
 \alias{extract_vc}
 \title{Extract variance components}
 \usage{
-extract_vc(model)
+extract_vc(model, tibble = TRUE)
 }
 \arguments{
 \item{model}{A gam or bam model}
+
+\item{tibble}{Return a tibble or standard default data.frame.  Default is
+\code{TRUE}.}
 }
 \value{
-A tibble (if possible) or data frame with the standard deviation, its lower and upper bounds, the variance, and the porportion of total variance for each variance component.
+A tibble (if \code{tibble = TRUE}) or data frame with the standard
+deviation, its lower and upper bounds, the variance, and the porportion of
+total variance for each variance component.
 }
 \description{
-This function extracts the variance components from a gam or bam object, where one is using the associated functions from the mgcv package for mixed models.
+This function extracts the variance components from a gam or bam
+object, where one is using the associated functions from the mgcv package
+for mixed models.
 }
 \details{
-This is essentially a pretty way to print \code{\link{gam.vcomp}}.  Note that if you do something like a random slope, the gam approach does not estimate the intercept-slope correlation, so none will be printed.  Should work fine on standard smooth terms also, but the model \emph{must be estimated with} \code{method = REML} or \code{method = ML}. This is the default for non-exponential families, but otherwise you'll have to change the value or will receive an error.  Have not tested much with interactions, using \code{by}, etc., but it has worked on some default \code{\link{mgcv}} examples.
+This is essentially a pretty way to print \code{\link{gam.vcomp}}.
+Note that if you do something like a random slope, the gam approach does
+not estimate the intercept-slope correlation, so none will be printed.
+Should work fine on standard smooth terms also, but the model \emph{must be
+estimated with} \code{method = REML} or \code{method = ML}. This is the default for
+non-exponential families, but otherwise you'll have to change the value or
+will receive an error.  Have not tested much with interactions, using \code{by},
+etc., but it has worked on some default \code{\link{mgcv}} examples.
 }
 \examples{
 library(mgcv); library(lme4)
-lmer_model = lmer(Reaction ~  Days + (Days|Subject), data=sleepstudy)
+lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
 ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
 data=sleepstudy,
 method = 'REML')
 
 VarCorr(lmer_model)
 extract_vc(ga_model)
+
+
 }

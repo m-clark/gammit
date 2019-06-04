@@ -1,12 +1,25 @@
 #' Extract variance components
 #'
-#' @description This function extracts the variance components from a gam or bam object, where one is using the associated functions from the mgcv package for mixed models.
+#' @description This function extracts the variance components from a gam or bam
+#'   object, where one is using the associated functions from the mgcv package
+#'   for mixed models.
 #'
 #' @param model A gam or bam model
+#' @param tibble Return a tibble or standard default data.frame.  Default is
+#'   `TRUE`.
 #'
-#' @details This is essentially a pretty way to print \code{\link{gam.vcomp}}.  Note that if you do something like a random slope, the gam approach does not estimate the intercept-slope correlation, so none will be printed.  Should work fine on standard smooth terms also, but the model \emph{must be estimated with} `method = REML` or `method = ML`. This is the default for non-exponential families, but otherwise you'll have to change the value or will receive an error.  Have not tested much with interactions, using `by`, etc., but it has worked on some default \code{\link{mgcv}} examples.
+#' @details This is essentially a pretty way to print \code{\link{gam.vcomp}}.
+#'   Note that if you do something like a random slope, the gam approach does
+#'   not estimate the intercept-slope correlation, so none will be printed.
+#'   Should work fine on standard smooth terms also, but the model \emph{must be
+#'   estimated with} `method = REML` or `method = ML`. This is the default for
+#'   non-exponential families, but otherwise you'll have to change the value or
+#'   will receive an error.  Have not tested much with interactions, using `by`,
+#'   etc., but it has worked on some default \code{\link{mgcv}} examples.
 #'
-#' @return A tibble (if possible) or data frame with the standard deviation, its lower and upper bounds, the variance, and the porportion of total variance for each variance component.
+#' @return A tibble (if `tibble = TRUE`) or data frame with the standard
+#'   deviation, its lower and upper bounds, the variance, and the porportion of
+#'   total variance for each variance component.
 #'
 #' @examples
 #' library(mgcv); library(lme4)
@@ -18,19 +31,19 @@
 #'
 #' VarCorr(lmer_model)
 #' extract_vc(ga_model)
-
-#' @importFrom rlang is_installed
+#'
+#'
 #' @importFrom tibble rownames_to_column
 #' @importFrom stringr str_replace
 #' @importFrom mgcv gam.vcomp
 #' @export
-extract_vc <- function(model) {
+extract_vc <- function(model, tibble = TRUE) {
 
   invisible(utils::capture.output(vc <- mgcv::gam.vcomp(model)))  # keep from printing result
 
   vc = data.frame(vc)
 
-  if (rlang::is_installed('tibble')) {
+  if (tibble) {
     vc = tibble::rownames_to_column(vc, var = 'component')
     vc$component = stringr::str_remove_all(vc$component, pattern = 's\\(|ti\\(|te\\(|\\)')
     vc$component = stringr::str_replace(vc$component, pattern = ',', '|')

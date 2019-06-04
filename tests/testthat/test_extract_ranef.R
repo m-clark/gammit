@@ -7,3 +7,9 @@ ga_model = mgcv::gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, b
 test_that('Works on single lme model', {
   expect_s3_class(extract_ranef(ga_model), 'data.frame')
 })
+
+test_that('Takes tibble arg', {
+  expect_failure(
+    expect_s3_class(extract_ranef(ga_model, tibble = FALSE), 'tibble')
+  )
+})
