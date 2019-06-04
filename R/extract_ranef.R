@@ -9,7 +9,7 @@
 #' @param tibble Return a tibble or standard default data.frame.  Default is
 #'   `TRUE`.
 #'
-#' @details Returns a data frame of the the `component` type, the estimated random effect `re`, the estimated `se`, and approximate `lower` and `upper` bounds assuming  `+- 1.96*se`.  Note that the standard errors are Bayesian estimates (see \code{\link{gamObject}}, specifically type `Vp`).
+#' @details Returns a data frame of the the `component` type, the estimated random effect `re`, the estimated `se`, and approximate `lower` and `upper` bounds assuming  `+- 1.96*se`.  Note that the standard errors are Bayesian estimates (see \code{\link{gamObject}}, specifically type `Vp`).  The `re` will only reflect smooth terms whose basis function is 're', i.e. of class `random.effect`.  Others will be ignored.
 #'
 #' @return A `tibble` (if `tibble = TRUE`) or data frame with the random effect, its
 #'   standard errror, and its lower and upper bounds. The bounds are based on a
@@ -35,6 +35,17 @@
 #' @export
 extract_ranef <- function(model, re = NULL, tibble = TRUE) {
 
+  re_terms = sapply(model$smooth, function(x) inherits(x, 'random.effect'))
+
+  # this will probably break at some point, but the attempt is made to extract the
+  re_var_names = sapply(model$smooth[re_terms],
+                        function(x) ifelse(length(x$vn) == 1,
+                                           x$vn,
+                                           x$vn[length(x$vn)]))
+
+  re_levels = vector('list', length(re_var_names))
+  for (i in seq_along(re_var_names)) re_levels[[i]] = unique(model$model[, re_var_names[i]])
+
   gam_coef = stats::coef(model)
 
   # for later
@@ -57,8 +68,10 @@ extract_ranef <- function(model, re = NULL, tibble = TRUE) {
   re_n = dplyr::n_distinct(names(re0))  # possible use later
   re_names = names(re0)
 
+  # How to add levels in a generalizable way and across multiple re? mgcv strips the levels
   re = data.frame(
     component = re_names,
+    name = unlist(re_levels),
     re = re0,
     se = gam_se,
     lower = re0 - 1.96*gam_se,

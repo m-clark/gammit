@@ -43,14 +43,15 @@ extract_vc <- function(model, tibble = TRUE) {
 
   vc = data.frame(vc)
 
-  if (tibble) {
-    vc = tibble::rownames_to_column(vc, var = 'component')
-    vc$component = stringr::str_remove_all(vc$component, pattern = 's\\(|ti\\(|te\\(|\\)')
-    vc$component = stringr::str_replace(vc$component, pattern = ',', '|')
-  }
+  vc = tibble::rownames_to_column(vc, var = 'component')
+  vc$component = stringr::str_remove_all(vc$component, pattern = 's\\(|ti\\(|te\\(|\\)')
+  vc$component = stringr::str_replace(vc$component, pattern = ',', '|')
+
 
   vc$variance = vc$std.dev^2
   vc$proportion = vc$var/sum(vc$var)
+
+  if (tibble) vc = tibble::as_tibble(vc)
 
   vc
 }

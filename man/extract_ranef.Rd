@@ -25,7 +25,7 @@ Extract what would be the random effects from a mixed model from
 a gam object.  Assumes an mgcv model of the form \code{gam(... + s(g, bs='re'))}.
 }
 \details{
-Returns a data frame of the the \code{component} type, the estimated random effect \code{re}, the estimated \code{se}, and approximate \code{lower} and \code{upper} bounds assuming  \code{+- 1.96*se}.  Note that the standard errors are Bayesian estimates (see \code{\link{gamObject}}, specifically type \code{Vp}).
+Returns a data frame of the the \code{component} type, the estimated random effect \code{re}, the estimated \code{se}, and approximate \code{lower} and \code{upper} bounds assuming  \code{+- 1.96*se}.  Note that the standard errors are Bayesian estimates (see \code{\link{gamObject}}, specifically type \code{Vp}).  The \code{re} will only reflect smooth terms whose basis function is 're', i.e. of class \code{random.effect}.  Others will be ignored.
 }
 \examples{
 library(mgcv); library(lme4)
