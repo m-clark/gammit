@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg)](https://codecov.io/gh/m-clark/gammit?branch=master)
 <!-- badges: end -->
 
-The goal of gammit is to provide a set of functions to aid using `mgcv` (possibly solely) for mixed models.  I've been using it in lieu of `lme4`, especially the `bam` function, for GLMM with millions of observations and multiple random effects.  It's turning out very useful in this sense, but I'd like some more/different functionality with the results.  Furthermore, `mgcv` just has some nice things going on for such models anyway, so I'm looking to make it easier for me to get some things I want when I use it.
+The goal of gammit is to provide a set of functions to aid using `mgcv` (possibly solely) for mixed models.  I've been using it in lieu of `lme4`, especially the `bam` function, for GLMM with millions of observations and multiple random effects.  It's turning out very useful in this sense, but I'd like some more/different functionality with the results.  Furthermore, `mgcv` just has some nice things going on for such models anyway, so I'm looking to make it easier for me to get some things I want when I use it. 
 
 ## Installation
 

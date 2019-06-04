@@ -1,7 +1,8 @@
 #' Random effects for gam
 #'
 #' @description Extract what would be the random effects from a mixed model from
-#'   a gam object.  Assumes an mgcv model of the form `gam(... + s(g, bs='re'))`.
+#'   a gam object.  Assumes an mgcv model of the form `gam(... + s(g,
+#'   bs='re'))`.
 #'
 #' @param model The mgcv model
 #' @param re Which specific coefficients to extract. Currently not
@@ -9,11 +10,25 @@
 #' @param tibble Return a tibble or standard default data.frame.  Default is
 #'   `TRUE`.
 #'
-#' @details Returns a data frame of the the `component` type, the estimated random effect `re`, the estimated `se`, and approximate `lower` and `upper` bounds assuming  `+- 1.96*se`.  Note that the standard errors are Bayesian estimates (see \code{\link{gamObject}}, specifically type `Vp`).  The `re` will only reflect smooth terms whose basis function is 're', i.e. of class `random.effect`.  Others will be ignored.
+#' @details Returns a data frame of the the `component` type, the estimated
+#'   random effect `re`, the estimated `se`, and approximate `lower` and `upper`
+#'   bounds assuming  `+- 1.96*se`.  Note that the standard errors are Bayesian
+#'   estimates (see \code{\link{gamObject}}, specifically type `Vp`).  The `re`
+#'   will only reflect smooth terms whose basis function is 're', i.e. of class
+#'   `random.effect`.  Others will be ignored.
 #'
-#' @return A `tibble` (if `tibble = TRUE`) or data frame with the random effect, its
-#'   standard errror, and its lower and upper bounds. The bounds are based on a
-#'   simple normal approximation using the standard error.
+#' @return A `tibble` (if `tibble = TRUE`) or data frame with the random effect,
+#'   its standard errror, and its lower and upper bounds. The bounds are based
+#'   on a simple normal approximation using the standard error.
+#'
+#' @note `mgcv` strips the level names for 're' smooth terms, so this attempts
+#'   to get them back. This may not work under every circumstance, but the
+#'   attempt is made to extract the names of random effect groups based on how
+#'   they are ordered in the data (which is how the model matrix would be
+#'   constructed), and in the case of random slopes, detect that second variable
+#'   in the 're' specification would be the grouping variable. This will not
+#'   work for continuous x continous smooths of type 're', but I can't think of
+#'   a reason why you'd use that given your other options with `mgcv`.
 #'
 #' @seealso \code{\link{ranef}}
 #'
@@ -35,9 +50,8 @@
 #' @export
 extract_ranef <- function(model, re = NULL, tibble = TRUE) {
 
+  #
   re_terms = sapply(model$smooth, function(x) inherits(x, 'random.effect'))
-
-  # this will probably break at some point, but the attempt is made to extract the
   re_var_names = sapply(model$smooth[re_terms],
                         function(x) ifelse(length(x$vn) == 1,
                                            x$vn,
@@ -68,10 +82,9 @@ extract_ranef <- function(model, re = NULL, tibble = TRUE) {
   re_n = dplyr::n_distinct(names(re0))  # possible use later
   re_names = names(re0)
 
-  # How to add levels in a generalizable way and across multiple re? mgcv strips the levels
   re = data.frame(
     component = re_names,
-    name = unlist(re_levels),
+    group = unlist(re_levels),
     re = re0,
     se = gam_se,
     lower = re0 - 1.96*gam_se,

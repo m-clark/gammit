@@ -16,16 +16,31 @@ implemented.}
 \code{TRUE}.}
 }
 \value{
-A \code{tibble} (if \code{tibble = TRUE}) or data frame with the random effect, its
-standard errror, and its lower and upper bounds. The bounds are based on a
-simple normal approximation using the standard error.
+A \code{tibble} (if \code{tibble = TRUE}) or data frame with the random effect,
+its standard errror, and its lower and upper bounds. The bounds are based
+on a simple normal approximation using the standard error.
 }
 \description{
 Extract what would be the random effects from a mixed model from
 a gam object.  Assumes an mgcv model of the form \code{gam(... + s(g, bs='re'))}.
 }
 \details{
-Returns a data frame of the the \code{component} type, the estimated random effect \code{re}, the estimated \code{se}, and approximate \code{lower} and \code{upper} bounds assuming  \code{+- 1.96*se}.  Note that the standard errors are Bayesian estimates (see \code{\link{gamObject}}, specifically type \code{Vp}).  The \code{re} will only reflect smooth terms whose basis function is 're', i.e. of class \code{random.effect}.  Others will be ignored.
+Returns a data frame of the the \code{component} type, the estimated
+random effect \code{re}, the estimated \code{se}, and approximate \code{lower} and \code{upper}
+bounds assuming  \code{+- 1.96*se}.  Note that the standard errors are Bayesian
+estimates (see \code{\link{gamObject}}, specifically type \code{Vp}).  The \code{re}
+will only reflect smooth terms whose basis function is 're', i.e. of class
+\code{random.effect}.  Others will be ignored.
+}
+\note{
+\code{mgcv} strips the level names for 're' smooth terms, so this attempts
+to get them back. This may not work under every circumstance, but the
+attempt is made to extract the names of random effect groups based on how
+they are ordered in the data (which is how the model matrix would be
+constructed), and in the case of random slopes, detect that second variable
+in the 're' specification would be the grouping variable. This will not
+work for continuous x continous smooths of type 're', but I can't think of
+a reason why you'd use that given your other options with \code{mgcv}.
 }
 \examples{
 library(mgcv); library(lme4)
