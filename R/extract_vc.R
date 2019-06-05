@@ -39,6 +39,8 @@
 #' @export
 extract_vc <- function(model, tibble = TRUE) {
 
+  if ( !inherits(model, 'gam') ) stop("Need a gam object.")
+
   invisible(utils::capture.output(vc <- mgcv::gam.vcomp(model)))  # keep from printing result
 
   vc = data.frame(vc)

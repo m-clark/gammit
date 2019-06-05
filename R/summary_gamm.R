@@ -26,7 +26,7 @@
 #'
 #' @export
 summary_gamm = function(model, digits=3) {
-  if (! 'gam' %in% class(model)) stop("Need a gam object.")
+  if ( !inherits(model, 'gam') ) stop("Need a gam object.")
 
   summary_table = mgcv::summary.gam(model)$p.table
 

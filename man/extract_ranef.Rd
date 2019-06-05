@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_ranef.R
 \name{extract_ranef}
 \alias{extract_ranef}
-\title{Random effects for gam}
+\title{Extract random effects from a gam}
 \usage{
 extract_ranef(model, re = NULL, tibble = TRUE)
 }

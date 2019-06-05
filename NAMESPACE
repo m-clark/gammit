@@ -2,9 +2,11 @@
 
 export(extract_ranef)
 export(extract_vc)
+export(predict_gamm)
 export(summary_gamm)
 importFrom(dplyr,n_distinct)
 importFrom(mgcv,gam.vcomp)
+importFrom(stats,predict)
 importFrom(stringr,str_detect)
 importFrom(stringr,str_replace)
 importFrom(tibble,as_tibble)

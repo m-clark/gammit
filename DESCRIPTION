@@ -1,7 +1,7 @@
 Package: gammit
 Type: Package
 Title: Using Generalized Additive Mixed Models
-Version: 0.1.0
+Version: 0.2.0
 Author: Micheal Clark
 Maintainer: Micheal Clark <micl@umich.edu>
 Description: The goal of gammit is to provide a set of functions to aid using mgcv (possibly solely) for mixed models.

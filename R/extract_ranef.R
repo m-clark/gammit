@@ -1,4 +1,4 @@
-#' Random effects for gam
+#' Extract random effects from a gam
 #'
 #' @description Extract what would be the random effects from a mixed model from
 #'   a gam object.  Assumes an mgcv model of the form `gam(... + s(g,
@@ -50,7 +50,9 @@
 #' @export
 extract_ranef <- function(model, re = NULL, tibble = TRUE) {
 
-  #
+  if ( !inherits(model, 'gam') ) stop("Need a gam object.")
+
+  # get the re variables and their levels
   re_terms = sapply(model$smooth, function(x) inherits(x, 'random.effect'))
   re_var_names = sapply(model$smooth[re_terms],
                         function(x) ifelse(length(x$vn) == 1,

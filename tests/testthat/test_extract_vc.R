@@ -8,6 +8,10 @@ test_that('Works on single lme model', {
   expect_s3_class(extract_vc(ga_model), 'data.frame')
 })
 
+test_that('Fails with non-gam', {
+  expect_error(extract_vc(lm(mpg ~ wt, mtcars)))
+})
+
 test_that('Takes tibble arg', {
   expect_failure(
     expect_s3_class(extract_vc(ga_model, tibble = FALSE), 'tibble')
