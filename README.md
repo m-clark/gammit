@@ -59,7 +59,7 @@ library(mgcv); library(lme4); library(gammit)
 # 
 #     lmList
 
-lmer_model = lmer(Reaction ~  Days + (1|Subject) + (0 + Days|Subject), data=sleepstudy)
+lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
 
 ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
                data=sleepstudy,
@@ -67,7 +67,7 @@ ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'
 
 summary(lmer_model)
 # Linear mixed model fit by REML ['lmerMod']
-# Formula: Reaction ~ Days + (1 | Subject) + (0 + Days | Subject)
+# Formula: Reaction ~ Days + ((1 | Subject) + (0 + Days | Subject))
 #    Data: sleepstudy
 # 
 # REML criterion at convergence: 1743.7
@@ -111,14 +111,14 @@ summary_gamm(ga_model)
 Extract the variance components.
 
 ``` r
-VarCorr(lmer_model)
-#  Groups    Name        Std.Dev.
-#  Subject   (Intercept) 25.0499 
-#  Subject.1 Days         5.9887 
-#  Residual              25.5652
+data.frame(VarCorr(lmer_model))
+#         grp        var1 var2      vcov     sdcor
+# 1   Subject (Intercept) <NA> 627.49997 25.049949
+# 2 Subject.1        Days <NA>  35.86395  5.988652
+# 3  Residual        <NA> <NA> 653.57996 25.565210
 
 
-extract_vc(ga_model)
+extract_vc(ga_model)  # option for tibble = FALSE
 # # A tibble: 3 x 6
 #   component    std.dev lower upper variance proportion
 #   <chr>          <dbl> <dbl> <dbl>    <dbl>      <dbl>
@@ -262,4 +262,4 @@ head(compare)
 ```
 
 Along with that, one can still use include/exclude for other smooth
-terms.
+terms as above.

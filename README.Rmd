@@ -44,7 +44,7 @@ This example demonstrates the summary function with comparison to the correspond
 ```{r summary}
 library(mgcv); library(lme4); library(gammit)
 
-lmer_model = lmer(Reaction ~  Days + (1|Subject) + (0 + Days|Subject), data=sleepstudy)
+lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
 
 ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
                data=sleepstudy,
@@ -59,10 +59,10 @@ summary_gamm(ga_model)
 Extract the variance components.
 
 ```{r extract_vc}
-VarCorr(lmer_model)
+data.frame(VarCorr(lmer_model))
 
 
-extract_vc(ga_model)
+extract_vc(ga_model)  # option for tibble = FALSE
 ```
 
 
@@ -103,6 +103,6 @@ compare = data.frame(
 head(compare)
 ```
 
-Along with that, one can still use include/exclude for other smooth terms.
+Along with that, one can still use include/exclude for other smooth terms as above.
 
 
