@@ -2,8 +2,10 @@ Package: gammit
 Type: Package
 Title: Using Generalized Additive Mixed Models
 Version: 0.2.0
-Author: Micheal Clark
-Maintainer: Micheal Clark <micl@umich.edu>
+Authors@R: person("Michael", "Clark", role = c("aut", "cre"), email = "micl@umich.edu")
+Maintainer: Michael Clark <micl@umich.edu>
+URL: https://github.com/m-clark/gammit
+BugReports: https://github.com/m-clark/gammit/issues
 Description: The goal of gammit is to provide a set of functions to aid using mgcv (possibly solely) for mixed models.
 License: MIT + file LICENSE
 Encoding: UTF-8

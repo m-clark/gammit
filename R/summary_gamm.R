@@ -34,8 +34,11 @@ summary_gamm = function(model, digits=3) {
 
   vc = extract_vc(model, tibble = FALSE)
 
-  fe = data.frame(summary_table)
+  fe = data.frame(round(summary_table, digits = digits))
   names(fe) = colnames(summary_table)
+  fe$Term = rownames(summary_table)
+  fe = dplyr::select(fe, Term, dplyr::everything())
+  rownames(fe) = NULL
 
   # re part
   message("\nVariance components:\n")
@@ -53,7 +56,7 @@ summary_gamm = function(model, digits=3) {
   # fe part
   message("\n\nFixed Effects:\n")
 
-  print(format(round(fe, digits = digits), nsmall = digits))
+  print(format(fe, nsmall = digits), row.names = FALSE)
 
 
   invisible(list(vc = vc, fe = fe))

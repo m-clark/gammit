@@ -8,4 +8,16 @@
 \description{
 The goal of gammit is to provide a set of functions to aid using mgcv (possibly solely) for mixed models.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/m-clark/gammit}
+  \item Report bugs at \url{https://github.com/m-clark/gammit/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Michael Clark \email{micl@umich.edu}
+
+}
 \keyword{internal}
