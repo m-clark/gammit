@@ -1,4 +1,10 @@
 
+  - [gammit](#gammit)
+      - [Introduction](#introduction)
+      - [Installation](#installation)
+      - [Example](#example)
+      - [Prediction](#prediction)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # gammit
@@ -13,14 +19,19 @@ status](https://ci.appveyor.com/api/projects/status/github/m-clark/gammit?branch
 coverage](https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg)](https://codecov.io/gh/m-clark/gammit?branch=master)
 <!-- badges: end -->
 
+## Introduction
+
 The goal of gammit is to provide a set of functions to aid using `mgcv`
-(possibly solely) for mixed models. I’ve been using it in lieu of
+(possibly solely) for mixed models. Lately I’ve been using it in lieu of
 `lme4`, especially the `bam` function, for GLMM with millions of
 observations and multiple random effects. It’s turning out very useful
 in this sense, but I’d like some more/different functionality with the
 results. Furthermore, `mgcv` just has some nice things going on for such
 models anyway, so I’m looking to make it easier for me to get some
 things I want when I use it.
+
+At present there are four functions: `extract_vc`, `extract_ranef`,
+`summary_gamm`, and `predict_gamm.`
 
 ## Installation
 
@@ -34,7 +45,8 @@ devtools::install_github("m-clark/gammit")
 
 ## Example
 
-This example demonstrates the summary function:
+This example demonstrates the summary function with comparison to the
+corresponding `lme4` model.
 
 ``` r
 library(mgcv); library(lme4); library(gammit)
@@ -198,3 +210,56 @@ data.frame(extract_ranef(ga_model))
 # 35 Days|Subject   371  -1.0052925  2.67273  -6.243842   4.2332574
 # 36 Days|Subject   372   1.2583995  2.67273  -3.980150   6.4969494
 ```
+
+## Prediction
+
+There are a couple of ways to do prediction, and the main goal was to
+make it easy to use the `lme4` style to include random effects or not.
+`mgcv` already has this functionality as well, so this is mostly
+cosmetic. One benefit here is to provide standard errors for the
+prediction also.
+
+``` r
+head(predict_gamm(ga_model))
+#   prediction
+# 1   252.9178
+# 2   272.7086
+# 3   292.4994
+# 4   312.2901
+# 5   332.0809
+# 6   351.8717
+```
+
+Add standard errors.
+
+``` r
+head(data.frame(predict_gamm(ga_model, se=T)))
+#   prediction        se
+# 1   252.9178 12.410220
+# 2   272.7086 10.660891
+# 3   292.4994  9.191224
+# 4   312.2901  8.153871
+# 5   332.0809  7.724998
+# 6   351.8717  8.003034
+```
+
+``` r
+compare = data.frame(
+  gam_original = predict_gamm(ga_model)$prediction,
+  gam_fe_only  = predict_gamm(ga_model, re_form = NA)$prediction,
+  gam_fe_only2  = predict_gamm(ga_model, 
+                               exclude =  c('s(Subject)', "s(Days,Subject)"))$prediction,
+  lme4_fe_only = predict(lmer_model, re.form = NA))
+
+head(compare)
+#   gam_original gam_fe_only gam_fe_only2 lme4_fe_only
+# 1     252.9178    251.4051     251.4051     251.4051
+# 2     272.7086    261.8724     261.8724     261.8724
+# 3     292.4994    272.3397     272.3397     272.3397
+# 4     312.2901    282.8070     282.8070     282.8070
+# 5     332.0809    293.2742     293.2742     293.2742
+# 6     351.8717    303.7415     303.7415     303.7415
+```
+
+Along with that, one can still use include/exclude for other smooth
+terms.
