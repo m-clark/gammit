@@ -13,13 +13,14 @@ summary_gamm(model, digits = 3)
 }
 \value{
 Invisibly returns a list with the variance componets via
-\code{extract_vc} and fixed effects parameter
+\code{extract_vc} and fixed effects parameter, labeled \code{vc} and \code{fe}
+respectively.
 }
 \description{
 Summarize a gam model in a clean mixed effects style.
 }
 \details{
-This returns the variance components and fixed effects from a gam
+This displays the variance components and fixed effects from a gam
 model. Assumes an mgcv model of the form \code{gam(... + s(g, bs='re'))},
 but should work with just about any gam with a smooth term.
 }

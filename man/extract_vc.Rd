@@ -14,8 +14,8 @@ extract_vc(model, tibble = TRUE)
 }
 \value{
 A tibble (if \code{tibble = TRUE}) or data frame with the standard
-deviation, its lower and upper bounds, the variance, and the porportion of
-total variance for each variance component.
+deviation, its lower and upper bounds, the variance, and the relative
+proportion of total variance for each variance component.
 }
 \description{
 This function extracts the variance components from a gam or bam

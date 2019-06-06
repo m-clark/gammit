@@ -18,8 +18,8 @@
 #'   etc., but it has worked on some default \code{\link{mgcv}} examples.
 #'
 #' @return A tibble (if `tibble = TRUE`) or data frame with the standard
-#'   deviation, its lower and upper bounds, the variance, and the porportion of
-#'   total variance for each variance component.
+#'   deviation, its lower and upper bounds, the variance, and the relative
+#'   proportion of total variance for each variance component.
 #'
 #' @examples
 #' library(mgcv); library(lme4)
