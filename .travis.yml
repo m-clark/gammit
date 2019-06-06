@@ -8,7 +8,7 @@ warnings_are_errors: false
 
 matrix:
   include:
-  - r: 3.4.0
+  - r: 3.5.0
   - r: release
 
   allow_failures:
