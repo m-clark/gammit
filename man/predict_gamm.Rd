@@ -8,13 +8,13 @@ predict_gamm(model, newdata, re_form = NULL, se = FALSE,
   include = NULL, exclude = NULL, ...)
 }
 \arguments{
-\item{model}{A gam model.}
+\item{model}{A gam class model from the \code{\link{mgcv}} package.}
 
 \item{newdata}{Data on which to predict on. Empty by default.}
 
 \item{re_form}{\code{NULL}, \code{NA}, or character string. If \code{NULL} (default), all
 random effects will be used.  If NA, no random effects will be used. If
-character, must be of the form \code{"s(Varname)"}, where Varname would be the
+character, must be of the form \code{"s(varname)"}, where \code{varname} would be the
 name of the grouping variable pertaining to the random effect.  Appended to
 \code{include}.}
 
@@ -32,11 +32,11 @@ name of the grouping variable pertaining to the random effect.  Appended to
 A data frame of predictions and possibly standard errors.
 }
 \description{
-Use predict in an lme4 style on gam/bam objects.
+Use predict in an \code{lme4} style on gam/bam objects from \code{\link{mgcv}}.
 }
 \details{
 This is a wrapper for \code{\link{predict.gam}}.  The goal is to
-have similar functionality with lme4's predict function, which makes it
+have similar functionality with predict function in \code{lme4}, which makes it
 easy to drop all random effects or include specific ones.
 }
 \examples{

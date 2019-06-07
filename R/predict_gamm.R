@@ -1,11 +1,11 @@
 #' Make predictions with or without random effects
 #'
-#' @description Use predict in an lme4 style on gam/bam objects.
-#' @param model A gam model.
+#' @description Use predict in an `lme4` style on gam/bam objects from \code{\link{mgcv}}.
+#' @param model A gam class model from the \code{\link{mgcv}} package.
 #' @param newdata Data on which to predict on. Empty by default.
 #' @param re_form `NULL`, `NA`, or character string. If `NULL` (default), all
 #'   random effects will be used.  If NA, no random effects will be used. If
-#'   character, must be of the form `"s(Varname)"`, where Varname would be the
+#'   character, must be of the form `"s(varname)"`, where `varname` would be the
 #'   name of the grouping variable pertaining to the random effect.  Appended to
 #'   `include`.
 #' @param se Logical.  Include standard errors or not.
@@ -16,7 +16,7 @@
 #' @param ... Other arguments for \code{\link{predict.gam}}.
 #'
 #' @details This is a wrapper for \code{\link{predict.gam}}.  The goal is to
-#'   have similar functionality with lme4's predict function, which makes it
+#'   have similar functionality with predict function in `lme4`, which makes it
 #'   easy to drop all random effects or include specific ones.
 #' @return A data frame of predictions and possibly standard errors.
 #' @seealso \code{\link{predict.gam}}
@@ -118,10 +118,3 @@ predict_gamm <- function(
 
   preds
 }
-
-
-
-
-
-
-
