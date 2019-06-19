@@ -1,7 +1,7 @@
 Package: gammit
 Type: Package
 Title: Using Generalized Additive Mixed Models
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: person("Michael", "Clark", role = c("aut", "cre"), email = "micl@umich.edu")
 Maintainer: Michael Clark <micl@umich.edu>
 URL: https://github.com/m-clark/gammit
@@ -17,12 +17,13 @@ Imports:
     rlang,
     dplyr,
     stringr,
-    tibble
+    tibble,
+    visibly
 Suggests: 
     lme4,
     covr,
     knitr,
-    testthat
+    testthat,
 Remotes:
   m-clark/visibly
 RoxygenNote: 6.1.1
