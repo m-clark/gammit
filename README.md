@@ -1,10 +1,4 @@
 
-  - [gammit](#gammit)
-      - [Introduction](#introduction)
-      - [Installation](#installation)
-      - [Example](#example)
-      - [Prediction](#prediction)
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # gammit
@@ -104,9 +98,9 @@ Variance components:
 
 
 Fixed Effects:
-            Estimate Std. Error t value Pr(>|t|)
-(Intercept)  251.405      6.885  36.513    0.000
-Days          10.467      1.560   6.712    0.000
+        Term Estimate Std. Error t value Pr(>|t|)
+ (Intercept)  251.405      6.885  36.513    0.000
+        Days   10.467      1.560   6.712    0.000
 ```
 
 Extract the variance components.
@@ -176,7 +170,7 @@ extract_ranef(ga_model)
  8 Subject   334    -7.45   13.3 -33.5   18.6
  9 Subject   335     0.579  13.3 -25.4   26.6
 10 Subject   337    34.8    13.3   8.74  60.8
-# ... with 26 more rows
+# … with 26 more rows
 
 extract_ranef(ga_model, tibble = FALSE)
       component group          re       se      lower       upper
@@ -269,4 +263,6 @@ head(compare)
 ```
 
 Along with that, one can still use include/exclude for other smooth
-terms as above.
+terms as above. Unfortunately, some options do not yet work with `bam`
+objects, but this is to due to the functionality in `predict.gam` from
+`mgcv` and should change in the near future.

@@ -105,6 +105,6 @@ compare = data.frame(
 head(compare)
 ```
 
-Along with that, one can still use include/exclude for other smooth terms as above.
+Along with that, one can still use include/exclude for other smooth terms as above.  Unfortunately, some options do not yet work with `bam` objects, but this is to due to the functionality in `predict.gam` from `mgcv` and should change in the near future.
 
 
