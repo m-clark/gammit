@@ -1,5 +1,6 @@
 context('test extract variance components')
 
+
 ga_model = mgcv::gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
                      data = lme4::sleepstudy,
                      method = 'REML')
@@ -10,6 +11,12 @@ test_that('Works on single lme model', {
 
 test_that('Fails with non-gam', {
   expect_error(extract_vc(lm(mpg ~ wt, mtcars)))
+})
+
+test_that('Fails with non-REML', {
+  ga_model_noREML = mgcv::gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
+                              data = lme4::sleepstudy)
+  expect_error(extract_vc(ga_model_noREML))
 })
 
 test_that('Takes tibble arg', {
