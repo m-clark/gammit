@@ -40,7 +40,7 @@
 extract_vc <- function(model, tibble = TRUE) {
 
   if ( !inherits(model, 'gam') ) stop("Need a gam object.")
-  if ( model$method != 'REML' )
+  if ( !grepl(model$method, pattern = 'REML' ) )
     stop("REML required. Rerun model with method = 'REML' for appropriate results.")
 
   invisible(utils::capture.output(vc <- mgcv::gam.vcomp(model)))  # keep from printing result
