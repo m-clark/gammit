@@ -45,3 +45,14 @@ test_that('Ranef reflect lme4', {
   cor_re = cor(lmer_re, extract_ranef(ga_model_2gr)$re)
   expect_gt(cor_re, .99)
 })
+
+test_that('Ranef do not include other smooths (for now)', {
+
+  ga_model_sm = mgcv::gam(Reaction ~  s(Days) + s(Subject, bs='re') + s(Days, Subject, bs='re'),
+                       data = lme4::sleepstudy,
+                       method = 'REML')
+
+  expect_s3_class(extract_ranef(ga_model_sm), 'data.frame')
+  expect_equal(nrow(extract_ranef(ga_model_sm)),  36)
+
+})

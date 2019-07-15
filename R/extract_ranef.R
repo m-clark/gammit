@@ -58,6 +58,7 @@ extract_ranef <- function(model, re = NULL, tibble = TRUE) {
                         function(x) ifelse(length(x$vn) == 1,
                                            x$vn,
                                            x$vn[length(x$vn)]))
+  re_labels = sapply(model$smooth[re_terms], function(x) x$label)
 
   re_levels = vector('list', length(re_var_names))
   for (i in seq_along(re_var_names)) re_levels[[i]] = unique(model$model[, re_var_names[i]])
@@ -70,7 +71,15 @@ extract_ranef <- function(model, re = NULL, tibble = TRUE) {
   #   # ...
   # }
 
-  re0 = gam_coef[stringr::str_detect(names(gam_coef), pattern = '^s\\(')]
+  # issue, parenthesis in the names means problematic regex matching so remove
+  # all but key part of pattern
+  re_label_base = stringr::str_remove(re_labels,'s')  # remove first s
+  re_label_base = stringr::str_remove_all(re_label_base,'\\(|\\)')  # remove parenthesis
+
+  re_coef = stringr::str_detect(names(gam_coef),
+                                pattern = paste0(re_label_base, collapse = '|'))
+
+  re0 =  gam_coef[re_coef]
 
   gam_se = sqrt(diag(model$Vp))  # no names
   gam_se = gam_se[names(gam_coef) %in% names(re0)]
