@@ -1,11 +1,13 @@
 context('test predict_gamm')
 
-ga_model = mgcv::gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
+ga_model = mgcv::gam(Reaction ~  Days
+                     + s(Subject, bs='re')
+                     + s(Days, Subject, bs='re'),
                      data = lme4::sleepstudy,
                      method = 'REML')
 
 sleepstudy = lme4::sleepstudy
-nd = sleepstudy[sample(1:50), 10]
+nd = sleepstudy[sample(1:180, 10),]
 
 # Basic checks
 test_that('Works on single lme model', {
@@ -36,24 +38,50 @@ test_that('Fails with non-logical for se', {
   expect_error(predict_gamm(ga_model, se = 'sure!'))
 })
 
+test_that('Fails with non-logical for keep_prediction_data', {
+  expect_error(predict_gamm(ga_model, keep_prediction_data = 'sure!'))
+})
+
 
 # Other predictions -------------------------------------------------------
 
 # newdata
 test_that('Ok for new data', {
-  expect_s3_class(predict_gamm(ga_model, new_data = nd), 'data.frame')
+  expect_s3_class(predict_gamm(ga_model, newdata = nd), 'data.frame')
 })
 
 
 # random/fixed effects
 test_that('Can take specific re_form', {
-  expect_s3_class(predict_gamm(ga_model, new_data = nd, re_form = 's(Subject)'), 'data.frame')
+  expect_s3_class(predict_gamm(ga_model, newdata = nd, re_form = 's(Subject)'), 'data.frame')
 })
 
 test_that('Can take NA for re_form', {
-  expect_s3_class(predict_gamm(ga_model, new_data = nd, re_form = NA), 'data.frame')
+  expect_s3_class(predict_gamm(ga_model, newdata = nd, re_form = NA), 'data.frame')
 })
 
+# keeps data
+
+test_that('Can take arg for keep_prediction_data', {
+  expect_equal(
+    colnames(predict_gamm(
+      ga_model,
+      newdata = nd,
+      keep_prediction_data = TRUE
+    )),
+    c(colnames(nd), 'prediction')
+  )
+})
+
+test_that('Can take arg for keep_prediction_data', {
+  expect_equal(
+    colnames(predict_gamm(
+      ga_model,
+      keep_prediction_data = TRUE
+    )),
+    c(colnames(ga_model$model), 'prediction')
+  )
+})
 
 # Other misc --------------------------------------------------------------
 
@@ -89,7 +117,7 @@ fe_only = cbind(
 #   ))
 
 test_that('Can take NA for re_form', {
-  expect_s3_class(predict_gamm(ga_model, new_data = nd, re_form = NA), 'data.frame')
+  expect_s3_class(predict_gamm(ga_model, newdata = nd, re_form = NA), 'data.frame')
 })
 
 

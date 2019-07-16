@@ -8,17 +8,21 @@
 #'   character, must be of the form `"s(varname)"`, where `varname` would be the
 #'   name of the grouping variable pertaining to the random effect.  Appended to
 #'   `include`.
-#' @param se Logical.  Include standard errors or not.
+#' @param se Logical.  Include standard errors or not. Default is FALSE.
 #' @param include Which random effects to include in prediction. See
 #'   \code{\link{predict.gam}} for details.
 #' @param exclude Which random effects to exclude in prediction. See
 #'   \code{\link{predict.gam}} for details.
+#' @param keep_prediction_data  Keep the model frame or newdata that was used in
+#'   the prediction in final output? Default is FALSE.
 #' @param ... Other arguments for \code{\link{predict.gam}}.
 #'
 #' @details This is a wrapper for \code{\link{predict.gam}}.  The goal is to
 #'   have similar functionality with predict function in `lme4`, which makes it
 #'   easy to drop all random effects or include specific ones.
+#'
 #' @return A data frame of predictions and possibly standard errors.
+#'
 #' @seealso \code{\link{predict.gam}}
 #'
 #' @importFrom stats predict
@@ -54,6 +58,7 @@ predict_gamm <- function(
   se = FALSE,
   include = NULL,
   exclude = NULL,
+  keep_prediction_data = FALSE,
   ...) {
 
   # Note because predict doesn't use NULL, can't use NULL for new_data arg or
@@ -65,8 +70,10 @@ predict_gamm <- function(
 
   if (! rlang::is_null(include) && ! rlang::is_character(include) )
       stop('include must be NULL or character.')
+
   if (! rlang::is_null(exclude) && ! rlang::is_character(exclude) )
       stop('exclude must be NULL or character.')
+
   if (! rlang::is_null(re_form) &&
       ! rlang::is_na(re_form) &
       ! rlang::is_character(re_form))
@@ -77,6 +84,9 @@ predict_gamm <- function(
 
   if (! rlang::is_logical(se) )
     stop('se must be TRUE or FALSE')
+
+  if (! rlang::is_logical(keep_prediction_data) )
+    stop('keep_prediction_data must be TRUE or FALSE')
 
   # standard prediction would simply call predict.gam
   if (rlang::is_null(re_form) | rlang::is_character(re_form)) {
@@ -96,6 +106,7 @@ predict_gamm <- function(
                       ...)
     }
   } else if (rlang::is_na(re_form)) {
+
     # FE only
     re_terms = sapply(model$smooth, function(x) inherits(x, 'random.effect'))
     re_terms = sapply(model$smooth[re_terms], function(x) x$label)
@@ -110,10 +121,19 @@ predict_gamm <- function(
 
 
   if (se) {
-    preds = data.frame(prediction = preds$fit,
-               se = preds$se)
+    preds = data.frame(prediction = preds$fit, se = preds$se
+      )
   } else {
     preds = data.frame(prediction = preds)
+  }
+
+  if (keep_prediction_data) {
+    if (missing(newdata)) {
+      base = model$model
+    } else {
+      base = newdata
+    }
+    preds = data.frame(base, preds)
   }
 
   preds

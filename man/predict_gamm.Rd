@@ -5,7 +5,7 @@
 \title{Make predictions with or without random effects}
 \usage{
 predict_gamm(model, newdata, re_form = NULL, se = FALSE,
-  include = NULL, exclude = NULL, ...)
+  include = NULL, exclude = NULL, keep_prediction_data = FALSE, ...)
 }
 \arguments{
 \item{model}{A gam class model from the \code{\link{mgcv}} package.}
@@ -18,13 +18,16 @@ character, must be of the form \code{"s(varname)"}, where \code{varname} would b
 name of the grouping variable pertaining to the random effect.  Appended to
 \code{include}.}
 
-\item{se}{Logical.  Include standard errors or not.}
+\item{se}{Logical.  Include standard errors or not. Default is FALSE.}
 
 \item{include}{Which random effects to include in prediction. See
 \code{\link{predict.gam}} for details.}
 
 \item{exclude}{Which random effects to exclude in prediction. See
 \code{\link{predict.gam}} for details.}
+
+\item{keep_prediction_data}{Keep the model frame or newdata that was used in
+the prediction in final output? Default is FALSE.}
 
 \item{...}{Other arguments for \code{\link{predict.gam}}.}
 }
