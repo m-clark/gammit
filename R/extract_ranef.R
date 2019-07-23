@@ -61,7 +61,15 @@ extract_ranef <- function(model, re = NULL, tibble = TRUE) {
   re_labels = sapply(model$smooth[re_terms], function(x) x$label)
 
   re_levels = vector('list', length(re_var_names))
-  for (i in seq_along(re_var_names)) re_levels[[i]] = unique(model$model[, re_var_names[i]])
+
+  # to do: check that re is factor; tried unique but won't hold ordering as mgcv
+  # uses levels to order coefficients
+  for (i in seq_along(re_var_names)) {
+    if(!inherits(model$model[, re_var_names[i]], 'factor'))
+      stop('Specified random effect is not a factor, aborting.
+           You are on your own.')
+    re_levels[[i]] = levels(model$model[, re_var_names[i]])
+  }
 
   gam_coef = stats::coef(model)
 

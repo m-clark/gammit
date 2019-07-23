@@ -49,10 +49,20 @@ test_that('Ranef reflect lme4', {
 test_that('Ranef do not include other smooths (for now)', {
 
   ga_model_sm = mgcv::gam(Reaction ~  s(Days) + s(Subject, bs='re') + s(Days, Subject, bs='re'),
-                       data = lme4::sleepstudy,
-                       method = 'REML')
+                          data = lme4::sleepstudy,
+                          method = 'REML')
 
   expect_s3_class(extract_ranef(ga_model_sm), 'data.frame')
   expect_equal(nrow(extract_ranef(ga_model_sm)),  36)
+
+})
+
+test_that('Fails if RE is not factor', {
+
+  ga_model_num_re = mgcv::gam(Reaction ~  s(Days) + s(Subject, bs='re') + s(Days, Subject, bs='re'),
+                              data = within(lme4::sleepstudy, {Subject = as.integer(Subject)}),
+                              method = 'REML')
+
+  expect_error(extract_ranef(ga_model_num_re))
 
 })
