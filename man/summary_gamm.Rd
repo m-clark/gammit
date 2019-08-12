@@ -12,7 +12,7 @@ summary_gamm(model, digits = 3)
 \item{digits}{number of digits to display}
 }
 \value{
-Invisibly returns a list with the variance componets via
+Invisibly returns a list with the variance components via
 \code{extract_vc} and fixed effects parameter, labeled \code{vc} and \code{fe}
 respectively.
 }
@@ -25,16 +25,17 @@ model. Assumes an mgcv model of the form \code{gam(... + s(g, bs='re'))},
 but should work with just about any gam with a smooth term.
 }
 \examples{
-library(mgcv); library(lme4)
-lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
-ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
-data=sleepstudy,
-method = 'REML')
+library(mgcv)
+library(lme4)
+
+lmer_model <- lmer(Reaction ~ Days + (Days || Subject), data = sleepstudy)
+ga_model <- gam(Reaction ~ Days + s(Subject, bs = "re") + s(Days, Subject, bs = "re"),
+  data = sleepstudy,
+  method = "REML"
+)
 
 summary(lmer_model)
 summary_gamm(ga_model)
-
-
 }
 \seealso{
 \code{\link{extract_vc}}

@@ -40,32 +40,36 @@ Use predict in an \code{lme4} style on gam/bam objects from \code{\link{mgcv}}.
 \details{
 This is a wrapper for \code{\link{predict.gam}}.  The goal is to
 have similar functionality with predict function in \code{lme4}, which makes it
-easy to drop all random effects or include specific ones.
+easy to drop all random effects or include specific ones.  Some of this
+functionality is not yet available for class \code{bam}.
 }
 \examples{
-library(lme4); library(mgcv)
-lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
-ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
-               data = sleepstudy,
-               method = 'REML')
+library(lme4)
+library(mgcv)
+lmer_model <- lmer(Reaction ~ Days + (Days || Subject), data = sleepstudy)
+ga_model <- gam(Reaction ~ Days + s(Subject, bs = "re") + s(Days, Subject, bs = "re"),
+  data = sleepstudy,
+  method = "REML"
+)
 
 head(
   data.frame(
     lmer = predict(lmer_model),
-    gam  = predict_gamm(ga_model)
+    gam = predict_gamm(ga_model)
   )
 )
 
 head(
-  cbind(lmer = predict(lmer_model, re.form = NA),
-        gam1 = predict_gamm(ga_model, re_form = NA),
-        gam2 = predict_gamm(ga_model,
-                            exclude = c('s(Subject)', "s(Days,Subject)"))
+  cbind(
+    lmer = predict(lmer_model, re.form = NA),
+    gam1 = predict_gamm(ga_model, re_form = NA),
+    gam2 = predict_gamm(ga_model,
+      exclude = c("s(Subject)", "s(Days,Subject)")
+    )
   )
 )
 
 head(predict_gamm(ga_model, se = TRUE))
-
 }
 \seealso{
 \code{\link{predict.gam}}

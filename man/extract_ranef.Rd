@@ -17,7 +17,7 @@ implemented.}
 }
 \value{
 A \code{tibble} (if \code{tibble = TRUE}) or data frame with the random effect,
-its standard errror, and its lower and upper bounds. The bounds are based
+its standard error, and its lower and upper bounds. The bounds are based
 on a simple normal approximation using the standard error.
 }
 \description{
@@ -39,19 +39,21 @@ attempt is made to extract the names of random effect groups based on how
 they are ordered in the data (which is how the model matrix would be
 constructed), and in the case of random slopes, detect that second variable
 in the 're' specification would be the grouping variable. This will not
-work for continuous x continous smooths of type 're', but I can't think of
+work for continuous x continuous smooths of type 're', but I can't think of
 a reason why you'd use that given your other options with \code{mgcv}.
 }
 \examples{
-library(mgcv); library(lme4)
-lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
-ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
-data=sleepstudy,
-method = 'REML')
+library(mgcv)
+library(lme4)
+
+lmer_model <- lmer(Reaction ~ Days + (Days || Subject), data = sleepstudy)
+ga_model <- gam(Reaction ~ Days + s(Subject, bs = "re") + s(Days, Subject, bs = "re"),
+  data = sleepstudy,
+  method = "REML"
+)
 
 ranef(lmer_model)
 extract_ranef(ga_model)
-
 }
 \seealso{
 \code{\link{ranef}}

@@ -22,40 +22,39 @@
 #'   proportion of total variance for each variance component.
 #'
 #' @examples
-#' library(mgcv); library(lme4)
-
-#' lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
-#' ga_model = gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
-#' data=sleepstudy,
-#' method = 'REML')
+#' library(mgcv)
+#' library(lme4)
+#'
+#' lmer_model <- lmer(Reaction ~ Days + (Days || Subject), data = sleepstudy)
+#' ga_model <- gam(Reaction ~ Days + s(Subject, bs = "re") + s(Days, Subject, bs = "re"),
+#'   data = sleepstudy,
+#'   method = "REML"
+#' )
 #'
 #' VarCorr(lmer_model)
 #' extract_vc(ga_model)
-#'
-#'
 #' @importFrom tibble rownames_to_column
 #' @importFrom stringr str_replace
 #' @importFrom mgcv gam.vcomp
 #' @export
 extract_vc <- function(model, tibble = TRUE) {
-
-  if ( !inherits(model, 'gam') ) stop("Need a gam object.")
-  if ( !grepl(model$method, pattern = 'REML' ) )
+  if (!inherits(model, "gam")) stop("Need a gam object.")
+  if (!grepl(model$method, pattern = "REML")) {
     stop("REML required. Rerun model with method = 'REML' for appropriate results.")
+  }
 
-  invisible(utils::capture.output(vc <- mgcv::gam.vcomp(model)))  # keep from printing result
+  invisible(utils::capture.output(vc <- mgcv::gam.vcomp(model))) # keep from printing result
 
-  vc = data.frame(vc)
+  vc <- data.frame(vc)
 
-  vc = tibble::rownames_to_column(vc, var = 'component')
-  vc$component = stringr::str_remove_all(vc$component, pattern = 's\\(|ti\\(|te\\(|\\)')
-  vc$component = stringr::str_replace(vc$component, pattern = ',', '|')
+  vc <- tibble::rownames_to_column(vc, var = "component")
+  vc$component <- stringr::str_remove_all(vc$component, pattern = "s\\(|ti\\(|te\\(|\\)")
+  vc$component <- stringr::str_replace(vc$component, pattern = ",", "|")
 
+  vc$variance <- vc$std.dev^2
+  vc$proportion <- vc$var / sum(vc$var)
 
-  vc$variance = vc$std.dev^2
-  vc$proportion = vc$var/sum(vc$var)
-
-  if (tibble) vc = tibble::as_tibble(vc)
+  if (tibble) vc <- tibble::as_tibble(vc)
 
   vc
 }
