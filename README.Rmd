@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 The goal of gammit is to provide a set of functions to aid using `mgcv` (possibly solely) for mixed models.  Lately I've been using it in lieu of `lme4`, especially the `bam` function, for GLMM with millions of observations and multiple random effects.  It's turning out very useful in this sense, but I'd like some more/different functionality with the results.  Furthermore, `mgcv` just has some nice things going on for such models anyway, like the ability to add other smooth terms, alternative distributions for the target variable, etc., so I'm looking to make it easier for me to get some things I want when I use it. 
 
-At present there are four functions: `extract_vc`, `extract_ranef`, `summary_gamm`, and `predict_gamm.`
+At present there are four functions: `extract_vc`, `extract_ranef`, `extract_fixed`, `summary_gamm`, and `predict_gamm.`
 
 ## Installation
 
@@ -77,6 +77,17 @@ ranef(lmer_model)
 extract_ranef(ga_model)
 
 extract_ranef(ga_model, tibble = FALSE)
+```
+
+Extract the fixed effects.
+
+```{r extract_fixed}
+fixef(lmer_model)
+
+
+extract_fixed(ga_model)
+
+extract_fixed(ga_model, tibble = FALSE)
 ```
 
 

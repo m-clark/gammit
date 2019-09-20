@@ -1,4 +1,10 @@
 
+  - [gammit](#gammit)
+      - [Introduction](#introduction)
+      - [Installation](#installation)
+      - [Example](#example)
+      - [Prediction](#prediction)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # gammit
@@ -26,7 +32,7 @@ distributions for the target variable, etc., so I’m looking to make it
 easier for me to get some things I want when I use it.
 
 At present there are four functions: `extract_vc`, `extract_ranef`,
-`summary_gamm`, and `predict_gamm.`
+`extract_fixed`, `summary_gamm`, and `predict_gamm.`
 
 ## Installation
 
@@ -170,7 +176,7 @@ extract_ranef(ga_model)
  8 Subject   334    -7.45   13.3 -33.5   18.6
  9 Subject   335     0.579  13.3 -25.4   26.6
 10 Subject   337    34.8    13.3   8.74  60.8
-# … with 26 more rows
+# ... with 26 more rows
 
 extract_ranef(ga_model, tibble = FALSE)
       component group          re       se      lower       upper
@@ -210,6 +216,27 @@ extract_ranef(ga_model, tibble = FALSE)
 34 Days|Subject   370   4.9837889  2.67273  -0.254761  10.2223387
 35 Days|Subject   371  -1.0052925  2.67273  -6.243842   4.2332574
 36 Days|Subject   372   1.2583995  2.67273  -3.980150   6.4969494
+```
+
+Extract the fixed effects.
+
+``` r
+fixef(lmer_model)
+(Intercept)        Days 
+  251.40510    10.46729 
+
+
+extract_fixed(ga_model)
+# A tibble: 2 x 5
+  Term        Estimate    SE     LL    UL
+  <fct>          <dbl> <dbl>  <dbl> <dbl>
+1 (Intercept)    251.   6.89 238.   265. 
+2 Days            10.5  1.56   7.41  13.5
+
+extract_fixed(ga_model, tibble = FALSE)
+                   Term  Estimate       SE         LL        UL
+(Intercept) (Intercept) 251.40510 6.885396 237.909729 264.90048
+Days               Days  10.46729 1.559563   7.410542  13.52403
 ```
 
 ## Prediction
