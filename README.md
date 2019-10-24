@@ -1,10 +1,4 @@
 
-  - [gammit](#gammit)
-      - [Introduction](#introduction)
-      - [Installation](#installation)
-      - [Example](#example)
-      - [Prediction](#prediction)
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # gammit
@@ -25,7 +19,9 @@ The goal of gammit is to provide a set of functions to aid using `mgcv`
 (possibly solely) for mixed models. Lately I’ve been using it in lieu of
 `lme4`, especially the `bam` function, for GLMM with millions of
 observations and multiple random effects. It’s turning out very useful
-in this sense, but I’d like some more/different functionality with the
+in this sense (see [this
+post](https://m-clark.github.io/posts/2019-10-20-big-mixed-models/) for
+details), but I’d like some more/different functionality with the
 results. Furthermore, `mgcv` just has some nice things going on for such
 models anyway, like the ability to add other smooth terms, alternative
 distributions for the target variable, etc., so I’m looking to make it
@@ -52,7 +48,7 @@ corresponding `lme4` model.
 ``` r
 library(mgcv); library(lme4); library(gammit)
 Loading required package: nlme
-This is mgcv 1.8-28. For overview type 'help("mgcv-package")'.
+This is mgcv 1.8-29. For overview type 'help("mgcv-package")'.
 Loading required package: Matrix
 
 Attaching package: 'lme4'
@@ -176,7 +172,7 @@ extract_ranef(ga_model)
  8 Subject   334    -7.45   13.3 -33.5   18.6
  9 Subject   335     0.579  13.3 -25.4   26.6
 10 Subject   337    34.8    13.3   8.74  60.8
-# ... with 26 more rows
+# … with 26 more rows
 
 extract_ranef(ga_model, tibble = FALSE)
       component group          re       se      lower       upper
