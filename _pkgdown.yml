@@ -1,0 +1,74 @@
+title: 'gammit'
+title-img: logo.png
+
+authors:
+  Michael Clark:
+    href: https://m-clark.github.io
+    html: <img src="man/figures/mc_logo.png" width=10% style='display:inline'/>
+
+template:
+  params:
+    highlight: pygments
+    #bootswatch: sandstone
+    templates_path: inst/pkgdown
+
+highlight: pygments
+
+
+home:
+  #strip_header: true
+  links:
+  - text: Docs on Stats, R, and more
+    href: http://m-clark.github.io
+
+reference:
+  - title: "Extraction"
+    desc: >
+      Get variance components, random effects, etc.
+    contents:
+      - extract_fixed
+      - extract_vc
+      - extract_ranef
+
+  - title: "Summarize and predict"
+    desc: >
+      lme4-style summary and prediction tools.
+    contents:
+      - summary_gamm
+      - predict_gamm
+
+  - title: "Visualization"
+    desc: >
+      Visualization functions from visibly.
+    contents:
+      - plot_gam
+
+
+figures:
+  dev: png
+  dpi: 96
+  dev.args: []
+  fig.ext: png
+  fig.width: 7.2916667
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1.618
+
+navbar:
+  title: "gammit"
+  type: ~
+  left:
+    - text: "Reference"
+      href: "reference/index.html"
+    - text: "News"
+      href: "news/index.html"
+    - text: Articles
+      menu:
+      - text: Demo
+        href: articles/Demo.html
+  right:
+    - icon: fa-github-alt
+      href: https://github.com/m-clark
+    - icon: fa-empire
+      href: https://m-clark.github.io
+
