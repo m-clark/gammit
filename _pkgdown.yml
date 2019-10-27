@@ -62,10 +62,10 @@ navbar:
       href: "reference/index.html"
     - text: "News"
       href: "news/index.html"
-    - text: Articles
-      menu:
-      - text: Demo
-        href: articles/Demo.html
+#    - text: Articles
+#      menu:
+#      - text: Demo
+#        href: articles/Demo.html
   right:
     - icon: fa-github-alt
       href: https://github.com/m-clark

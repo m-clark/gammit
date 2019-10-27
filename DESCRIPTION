@@ -1,7 +1,7 @@
 Package: gammit
 Type: Package
 Title: Using Generalized Additive Mixed Models
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: person("Michael", "Clark", role = c("aut", "cre"), email = "micl@umich.edu")
 Maintainer: Michael Clark <micl@umich.edu>
 URL: https://github.com/m-clark/gammit

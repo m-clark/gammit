@@ -15,20 +15,27 @@ coverage](https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg)](h
 
 ## Introduction
 
-The goal of gammit is to provide a set of functions to aid using `mgcv`
-(possibly solely) for mixed models. Lately I’ve been using it in lieu of
-`lme4`, especially the `bam` function, for GLMM with millions of
-observations and multiple random effects. It’s turning out very useful
-in this sense (see [this
+The goal of gammit is to provide a set of functions to aid using
+<span class="pack" style="">mgcv</span> (possibly solely) for mixed
+models. Lately I’ve been using it in lieu of
+<span class="pack" style="">lme4</span>, especially the
+<span class="func" style="">bam</span> function, for GLMM with millions
+of observations and multiple random effects. It’s turning out very
+useful in this sense (see [this
 post](https://m-clark.github.io/posts/2019-10-20-big-mixed-models/) for
 details), but I’d like some more/different functionality with the
-results. Furthermore, `mgcv` just has some nice things going on for such
-models anyway, like the ability to add other smooth terms, alternative
-distributions for the target variable, etc., so I’m looking to make it
-easier for me to get some things I want when I use it.
+results. Furthermore, <span class="pack" style="">mgcv</span> just has
+some nice things going on for such models anyway, like the ability to
+add other smooth terms, alternative distributions for the target
+variable, etc., so I’m looking to make it easier for me to get some
+things I want when I use it.
 
-At present there are four functions: `extract_vc`, `extract_ranef`,
-`extract_fixed`, `summary_gamm`, and `predict_gamm.`
+At present there are four functions:
+<span class="func" style="">extract\_vc</span>,
+<span class="func" style="">extract\_ranef</span>,
+<span class="func" style="">extract\_fixed</span>,
+<span class="func" style="">summary\_gamm</span>, and
+<span class="func" style="">predict\_gamm.</span>
 
 ## Installation
 
@@ -42,19 +49,23 @@ devtools::install_github("m-clark/gammit")
 
 ## Example
 
-This example demonstrates the summary function with comparison to the
-corresponding `lme4` model.
+This example demonstrates the
+<span class="func" style="">summary\_gamm</span> function with
+comparison to the corresponding <span class="pack" style="">lme4</span>
+model.
 
 ``` r
-library(mgcv); library(lme4); library(gammit)
+library(mgcv)
 Loading required package: nlme
 This is mgcv 1.8-29. For overview type 'help("mgcv-package")'.
+library(lme4)
 Loading required package: Matrix
 
 Attaching package: 'lme4'
 The following object is masked from 'package:nlme':
 
     lmList
+library(gammit)
 
 lmer_model = lmer(Reaction ~  Days + (Days || Subject), data=sleepstudy)
 
@@ -105,7 +116,8 @@ Fixed Effects:
         Days   10.467      1.560   6.712    0.000
 ```
 
-Extract the variance components.
+Extract the variance components with
+<span class="func" style="">extract\_vc</span>.
 
 ``` r
 data.frame(VarCorr(lmer_model))
@@ -130,7 +142,8 @@ extract_vc(ga_model, tibble = FALSE)
 3        scale 25.565254 22.791745 28.676269 653.58221 0.49626164
 ```
 
-Extract the random effects.
+Extract the random effects with
+<span class="func" style="">extract\_ranef</span>.
 
 ``` r
 ranef(lmer_model)
@@ -214,7 +227,8 @@ extract_ranef(ga_model, tibble = FALSE)
 36 Days|Subject   372   1.2583995  2.67273  -3.980150   6.4969494
 ```
 
-Extract the fixed effects.
+Extract the fixed effects
+<span class="func" style="">extract\_fixef</span>.
 
 ``` r
 fixef(lmer_model)
@@ -237,11 +251,13 @@ Days               Days  10.46729 1.559563   7.410542  13.52403
 
 ## Prediction
 
-There are a couple of ways to do prediction, and the main goal was to
-make it easy to use the `lme4` style to include random effects or not.
-`mgcv` already has this functionality as well, so this is mostly
-cosmetic. One benefit here is to provide standard errors for the
-prediction also.
+There are a couple of ways to do prediction, and the main goal for
+gammit was to make it easy to use the
+<span class="pack" style="">lme4</span> style to include random effects
+or not. <span class="pack" style="">mgcv</span> already has this
+functionality as well, so the functionality of
+<span class="func" style="">predict\_gamm</span> is mostly cosmetic. One
+benefit here is to provide standard errors for the prediction also.
 
 ``` r
 head(predict_gamm(ga_model))
@@ -269,11 +285,11 @@ head(data.frame(predict_gamm(ga_model, se=T)))
 
 ``` r
 compare = data.frame(
-  gam_original = predict_gamm(ga_model)$prediction,
-  gam_fe_only  = predict_gamm(ga_model, re_form = NA)$prediction,
+  gam_original  = predict_gamm(ga_model)$prediction,
+  gam_fe_only   = predict_gamm(ga_model, re_form = NA)$prediction,
   gam_fe_only2  = predict_gamm(ga_model, 
                                exclude =  c('s(Subject)', "s(Days,Subject)"))$prediction,
-  lme4_fe_only = predict(lmer_model, re.form = NA))
+  lme4_fe_only  = predict(lmer_model, re.form = NA))
 
 head(compare)
   gam_original gam_fe_only gam_fe_only2 lme4_fe_only
@@ -286,6 +302,8 @@ head(compare)
 ```
 
 Along with that, one can still use include/exclude for other smooth
-terms as above. Unfortunately, some options do not yet work with `bam`
-objects, but this is to due to the functionality in `predict.gam` from
-`mgcv` and should change in the near future.
+terms as above. Unfortunately, some options do not yet work with
+<span class="objclass" style="">bam</span> objects, but this is to due
+to the functionality in <span class="func" style="">predict.gam</span>
+from <span class="pack" style="">mgcv</span> and should change in the
+near future.

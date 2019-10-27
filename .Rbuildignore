@@ -5,3 +5,7 @@
 ^codecov\.yml$
 ^README\.Rmd$
 ^appveyor\.yml$
+^_pkgdown\.yml$
+^code-of-conduct\.md$
+docs
+pkgdown
