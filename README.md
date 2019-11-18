@@ -1,4 +1,10 @@
 
+  - [gammit](#gammit)
+      - [Introduction](#introduction)
+      - [Installation](#installation)
+      - [Example](#example)
+      - [Prediction](#prediction)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # gammit
@@ -57,7 +63,7 @@ model.
 ``` r
 library(mgcv)
 Loading required package: nlme
-This is mgcv 1.8-29. For overview type 'help("mgcv-package")'.
+This is mgcv 1.8-30. For overview type 'help("mgcv-package")'.
 library(lme4)
 Loading required package: Matrix
 
@@ -104,10 +110,10 @@ Days -0.184
 summary_gamm(ga_model)
 
 Variance components:
-    component std.dev  lower  upper variance proportion
-      Subject  25.051 16.085 39.015  627.571      0.477
- Days|Subject   5.988  4.025  8.908   35.858      0.027
-        scale  25.565 22.792 28.676  653.582      0.496
+    group    effect variance     sd sd_2.5 sd_97.5 var_prop
+  Subject Intercept  627.571 25.051 16.085  39.015    0.477
+  Subject      Days   35.858  5.988  4.025   8.908    0.027
+ Residual            653.582 25.565 22.792  28.676    0.496
 
 
 Fixed Effects:
@@ -128,18 +134,10 @@ data.frame(VarCorr(lmer_model))
 
 
 extract_vc(ga_model)
-# A tibble: 3 x 6
-  component    std.dev lower upper variance proportion
-  <chr>          <dbl> <dbl> <dbl>    <dbl>      <dbl>
-1 Subject        25.1  16.1  39.0     628.      0.477 
-2 Days|Subject    5.99  4.03  8.91     35.9     0.0272
-3 scale          25.6  22.8  28.7     654.      0.496 
-
-extract_vc(ga_model, tibble = FALSE)
-     component   std.dev     lower     upper  variance proportion
-1      Subject 25.051370 16.085365 39.015038 627.57115 0.47651158
-2 Days|Subject  5.988153  4.025248  8.908263  35.85797 0.02722678
-3        scale 25.565254 22.791745 28.676269 653.58221 0.49626164
+     group    effect variance     sd sd_2.5 sd_97.5 var_prop
+1  Subject Intercept  627.571 25.051 16.085  39.015    0.477
+2  Subject      Days   35.858  5.988  4.025   8.908    0.027
+3 Residual            653.582 25.565 22.792  28.676    0.496
 ```
 
 Extract the random effects with
@@ -172,59 +170,20 @@ with conditional variances for "Subject"
 
 
 extract_ranef(ga_model)
-# A tibble: 36 x 6
-   component group      re    se  lower upper
-   <fct>     <fct>   <dbl> <dbl>  <dbl> <dbl>
- 1 Subject   308     1.51   13.3 -24.5   27.5
- 2 Subject   309   -40.4    13.3 -66.4  -14.3
- 3 Subject   310   -39.2    13.3 -65.2  -13.2
- 4 Subject   330    24.5    13.3  -1.51  50.5
- 5 Subject   331    22.9    13.3  -3.11  48.9
- 6 Subject   332     9.22   13.3 -16.8   35.2
- 7 Subject   333    17.2    13.3  -8.87  43.2
- 8 Subject   334    -7.45   13.3 -33.5   18.6
- 9 Subject   335     0.579  13.3 -25.4   26.6
-10 Subject   337    34.8    13.3   8.74  60.8
-# … with 26 more rows
-
-extract_ranef(ga_model, tibble = FALSE)
-      component group          re       se      lower       upper
-1       Subject   308   1.5127209 13.27913 -24.514366  27.5398077
-2       Subject   309 -40.3739742 13.27913 -66.401061 -14.3468874
-3       Subject   310 -39.1811090 13.27913 -65.208196 -13.1540223
-4       Subject   330  24.5189267 13.27913  -1.508160  50.5460134
-5       Subject   331  22.9144576 13.27913  -3.112629  48.9415443
-6       Subject   332   9.2219858 13.27913 -16.805101  35.2490725
-7       Subject   333  17.1561444 13.27913  -8.870942  43.1832312
-8       Subject   334  -7.4517412 13.27913 -33.478828  18.5753455
-9       Subject   335   0.5786996 13.27913 -25.448387  26.6057863
-10      Subject   337  34.7679974 13.27913   8.740911  60.7950841
-11      Subject   349 -25.7543565 13.27913 -51.781443   0.2727302
-12      Subject   350 -13.8650381 13.27913 -39.892125  12.1620486
-13      Subject   351   4.9159796 13.27913 -21.111107  30.9430663
-14      Subject   352  20.9290802 13.27913  -5.098006  46.9561670
-15      Subject   369   3.2586540 13.27913 -22.768433  29.2857407
-16      Subject   370 -26.4758514 13.27913 -52.502938  -0.4487647
-17      Subject   371   0.9056463 13.27913 -25.121440  26.9327331
-18      Subject   372  12.4217779 13.27913 -13.605309  38.4488646
-19 Days|Subject   308   9.3234834  2.67273   4.084934  14.5620333
-20 Days|Subject   309  -8.5991559  2.67273 -13.837706  -3.3606060
-21 Days|Subject   310  -5.3877793  2.67273 -10.626329  -0.1492295
-22 Days|Subject   330  -4.9686478  2.67273 -10.207198   0.2699021
-23 Days|Subject   331  -3.1939375  2.67273  -8.432487   2.0446123
-24 Days|Subject   332  -0.3084952  2.67273  -5.547045   4.9300546
-25 Days|Subject   333  -0.2872107  2.67273  -5.525761   4.9513392
-26 Days|Subject   334   1.1159909  2.67273  -4.122559   6.3545407
-27 Days|Subject   335 -10.9059600  2.67273 -16.144510  -5.6674101
-28 Days|Subject   337   8.6276039  2.67273   3.389054  13.8661538
-29 Days|Subject   349   1.2806922  2.67273  -3.957858   6.5192421
-30 Days|Subject   350   6.7563993  2.67273   1.517849  11.9949492
-31 Days|Subject   351  -3.0751321  2.67273  -8.313682   2.1634177
-32 Days|Subject   352   3.5122033  2.67273  -1.726347   8.7507532
-33 Days|Subject   369   0.8730495  2.67273  -4.365500   6.1115993
-34 Days|Subject   370   4.9837889  2.67273  -0.254761  10.2223387
-35 Days|Subject   371  -1.0052925  2.67273  -6.243842   4.2332574
-36 Days|Subject   372   1.2583995  2.67273  -3.980150   6.4969494
+# A tibble: 36 x 7
+   group_var effect    group   value    se lower_2.5 upper_97.5
+   <chr>     <chr>     <chr>   <dbl> <dbl>     <dbl>      <dbl>
+ 1 Subject   Intercept 308     1.51   13.3    -24.5        27.5
+ 2 Subject   Intercept 309   -40.4    13.3    -66.4       -14.3
+ 3 Subject   Intercept 310   -39.2    13.3    -65.2       -13.2
+ 4 Subject   Intercept 330    24.5    13.3     -1.51       50.5
+ 5 Subject   Intercept 331    22.9    13.3     -3.11       48.9
+ 6 Subject   Intercept 332     9.22   13.3    -16.8        35.2
+ 7 Subject   Intercept 333    17.2    13.3     -8.87       43.2
+ 8 Subject   Intercept 334    -7.45   13.3    -33.5        18.6
+ 9 Subject   Intercept 335     0.579  13.3    -25.4        26.6
+10 Subject   Intercept 337    34.8    13.3      8.74       60.8
+# ... with 26 more rows
 ```
 
 Extract the fixed effects
@@ -237,16 +196,11 @@ fixef(lmer_model)
 
 
 extract_fixed(ga_model)
-# A tibble: 2 x 5
-  Term        Estimate    SE     LL    UL
-  <fct>          <dbl> <dbl>  <dbl> <dbl>
-1 (Intercept)    251.   6.89 238.   265. 
-2 Days            10.5  1.56   7.41  13.5
-
-extract_fixed(ga_model, tibble = FALSE)
-                   Term  Estimate       SE         LL        UL
-(Intercept) (Intercept) 251.40510 6.885396 237.909729 264.90048
-Days               Days  10.46729 1.559563   7.410542  13.52403
+# A tibble: 2 x 7
+  term      value    se     t     p lower_2.5 upper_97.5
+  <chr>     <dbl> <dbl> <dbl> <dbl>     <dbl>      <dbl>
+1 Intercept 251.   6.88 36.5      0    238.        265. 
+2 Days       10.5  1.56  6.71     0      7.39       13.5
 ```
 
 ## Prediction

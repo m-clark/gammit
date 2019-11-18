@@ -17,7 +17,7 @@ Imports:
     rlang,
     dplyr,
     stringr,
-    tibble,
+    purrr,
     visibly
 Suggests: 
     lme4,

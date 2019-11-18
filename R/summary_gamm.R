@@ -32,7 +32,7 @@ summary_gamm <- function(model, digits = 3) {
 
   summary_table <- mgcv::summary.gam(model)$p.table
 
-  vc <- extract_vc(model, tibble = FALSE)
+  vc <- extract_vc(model)
 
   fe <- data.frame(round(summary_table, digits = digits))
   names(fe) <- colnames(summary_table)

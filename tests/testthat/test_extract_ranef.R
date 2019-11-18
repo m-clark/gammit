@@ -12,11 +12,6 @@ test_that('Fails with non-gam', {
   expect_error(extract_ranef(lm(mpg ~ wt, mtcars)))
 })
 
-test_that('Takes tibble arg', {
-  expect_failure(
-    expect_s3_class(extract_ranef(ga_model, tibble = FALSE), 'tibble')
-  )
-})
 
 
 ss2 = lme4::sleepstudy %>%
@@ -42,7 +37,7 @@ test_that('Ranef reflect lme4', {
                                           + (1|id),
                               data=ss2)))
 
-  cor_re = cor(lmer_re, extract_ranef(ga_model_2gr)$re)
+  cor_re = cor(lmer_re, extract_ranef(ga_model_2gr)$value)
   expect_gt(cor_re, .99)
 })
 
@@ -57,12 +52,12 @@ test_that('Ranef do not include other smooths (for now)', {
 
 })
 
-test_that('Fails if RE is not factor', {
+test_that('Fails if RE is no factors', {
 
   ga_model_num_re = mgcv::gam(Reaction ~  s(Days) + s(Subject, bs='re') + s(Days, Subject, bs='re'),
                               data = within(lme4::sleepstudy, {Subject = as.integer(Subject)}),
                               method = 'REML')
 
-  expect_error(extract_ranef(ga_model_num_re))
+  expect_error(suppressWarnings(extract_ranef(ga_model_num_re)))
 
 })

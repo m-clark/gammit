@@ -121,26 +121,29 @@ effect parameters." />
 effect parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extract_fixed</span>(<span class='no'>model</span>, <span class='kw'>tibble</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>extract_fixed</span>(<span class='no'>model</span>, <span class='kw'>ci_level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>The mgcv model</p></td>
+      <td><p>A gam or bam model</p></td>
     </tr>
     <tr>
-      <th>tibble</th>
-      <td><p>Return a tibble or standard default data.frame.  Default is
-<code>TRUE</code>.</p></td>
+      <th>ci_level</th>
+      <td><p>Level for the confidence interval. Must be between 0 and 1.</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>Rounding for the output.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>data.frame</code> with the coefficients, standard error, and upper
-and lower bounds based on the standard error.</p>
+and lower bounds.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This essentially reproduces the 'parametric' output from
@@ -151,8 +154,8 @@ and lower bounds based on the standard error.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mgcv</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: nlme</span></div><div class='output co'>#&gt; <span class='message'>This is mgcv 1.8-29. For overview type 'help("mgcv-package")'.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lme4</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Matrix</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘lme4’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:nlme’:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mgcv</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: nlme</span></div><div class='output co'>#&gt; <span class='message'>This is mgcv 1.8-30. For overview type 'help("mgcv-package")'.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lme4</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Matrix</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'lme4'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:nlme':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    lmList</span></div><div class='input'>
 <span class='no'>lmer_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='no'>Reaction</span> ~ <span class='no'>Days</span> + (<span class='no'>Days</span> <span class='kw'>||</span> <span class='no'>Subject</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sleepstudy</span>)
@@ -162,11 +165,11 @@ and lower bounds based on the standard error.</p>
 )
 
 <span class='fu'><a href='https://rdrr.io/pkg/lme4/man/fixef.html'>fixef</a></span>(<span class='no'>lmer_model</span>)</div><div class='output co'>#&gt; (Intercept)        Days 
-#&gt;   251.40510    10.46729 </div><div class='input'><span class='fu'>extract_fixed</span>(<span class='no'>ga_model</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 5</span><span>
-#&gt;   Term        Estimate    SE     LL    UL
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)    251.   6.89 238.   265. 
-#&gt; </span><span style='color: #555555;'>2</span><span> Days            10.5  1.56   7.41  13.5</div><div class='input'>
+#&gt;   251.40510    10.46729 </div><div class='input'><span class='fu'>extract_fixed</span>(<span class='no'>ga_model</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 7</span><span>
+#&gt;   term      value    se     t     p lower_2.5 upper_97.5
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Intercept 251.   6.88 36.5      0    238.        265. 
+#&gt; </span><span style='color: #555555;'>2</span><span> Days       10.5  1.56  6.71     0      7.39       13.5</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

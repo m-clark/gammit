@@ -4,18 +4,21 @@
 \alias{extract_vc}
 \title{Extract variance components}
 \usage{
-extract_vc(model, tibble = TRUE)
+extract_vc(model, ci_level = 0.95, ci_scale = "sd", digits = 3)
 }
 \arguments{
 \item{model}{A gam or bam model}
 
-\item{tibble}{Return a tibble or standard default data.frame.  Default is
-\code{TRUE}.}
+\item{ci_level}{Level for the confidence interval. Must be between 0 and 1.}
+
+\item{ci_scale}{Whether the confidence interval should be on the variance or standard deviation scale.}
+
+\item{digits}{Rounding for the output.}
 }
 \value{
-A tibble (if \code{tibble = TRUE}) or data frame with the standard
-deviation, its lower and upper bounds, the variance, and the relative
-proportion of total variance for each variance component.
+A tibble or data frame with the standard deviation, its lower and
+upper bounds, the variance, and the relative proportion of total variance
+for each variance component.
 }
 \description{
 This function extracts the variance components from a gam or bam
@@ -44,4 +47,5 @@ ga_model <- gam(Reaction ~ Days + s(Subject, bs = "re") + s(Days, Subject, bs = 
 
 VarCorr(lmer_model)
 extract_vc(ga_model)
+
 }

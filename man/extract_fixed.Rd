@@ -4,17 +4,18 @@
 \alias{extract_fixed}
 \title{Extract the fixed effects from a GAMM}
 \usage{
-extract_fixed(model, tibble = TRUE)
+extract_fixed(model, ci_level = 0.95, digits = 3)
 }
 \arguments{
-\item{model}{The mgcv model}
+\item{model}{A gam or bam model}
 
-\item{tibble}{Return a tibble or standard default data.frame.  Default is
-\code{TRUE}.}
+\item{ci_level}{Level for the confidence interval. Must be between 0 and 1.}
+
+\item{digits}{Rounding for the output.}
 }
 \value{
 A \code{data.frame} with the coefficients, standard error, and upper
-and lower bounds based on the standard error.
+and lower bounds.
 }
 \description{
 When using a GAM for mixed models, we may have specific interest in the fixed

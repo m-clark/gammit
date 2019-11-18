@@ -19,13 +19,6 @@ test_that('Fails with non-REML', {
   expect_error(extract_vc(ga_model_noREML))
 })
 
-test_that('Takes tibble arg', {
-  expect_failure(
-    expect_s3_class(extract_vc(ga_model, tibble = FALSE), 'tibble')
-  )
-})
-
-
 
 
 

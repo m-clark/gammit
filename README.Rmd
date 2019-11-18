@@ -65,8 +65,6 @@ data.frame(VarCorr(lmer_model))
 
 
 extract_vc(ga_model)
-
-extract_vc(ga_model, tibble = FALSE)
 ```
 
 
@@ -77,8 +75,6 @@ ranef(lmer_model)
 
 
 extract_ranef(ga_model)
-
-extract_ranef(ga_model, tibble = FALSE)
 ```
 
 Extract the fixed effects <span class="func" style = "">extract_fixef</span>.
@@ -88,8 +84,6 @@ fixef(lmer_model)
 
 
 extract_fixed(ga_model)
-
-extract_fixed(ga_model, tibble = FALSE)
 ```
 
 

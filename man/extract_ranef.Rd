@@ -4,19 +4,19 @@
 \alias{extract_ranef}
 \title{Extract random effects from a gam}
 \usage{
-extract_ranef(model, re = NULL, tibble = TRUE)
+extract_ranef(model, re = NULL, ci_level = 0.95, digits = 3)
 }
 \arguments{
-\item{model}{The mgcv model}
+\item{model}{A gam or bam model}
 
-\item{re}{Which specific coefficients to extract. Currently not
-implemented.}
+\item{re}{Filter results to a specific random effect/grouping variable.}
 
-\item{tibble}{Return a tibble or standard default data.frame.  Default is
-\code{TRUE}.}
+\item{ci_level}{Level for the confidence interval. Must be between 0 and 1.}
+
+\item{digits}{Rounding for the output.}
 }
 \value{
-A \code{tibble} (if \code{tibble = TRUE}) or data frame with the random effect,
+A \code{tibble} or data frame with the random effect,
 its standard error, and its lower and upper bounds. The bounds are based
 on a simple normal approximation using the standard error.
 }
@@ -27,7 +27,7 @@ a gam object.  Assumes an mgcv model of the form \code{gam(... + s(g, bs='re'))}
 \details{
 Returns a data frame of the the \code{component} type, the estimated
 random effect \code{re}, the estimated \code{se}, and approximate \code{lower} and \code{upper}
-bounds assuming  \code{+- 1.96*se}.  Note that the standard errors are Bayesian
+bounds.  Note that the standard errors are Bayesian
 estimates (see \code{\link{gamObject}}, specifically type \code{Vp}).  The \code{re}
 will only reflect smooth terms whose basis function is 're', i.e. of class
 \code{random.effect}.  Others will be ignored.

@@ -121,37 +121,39 @@ a gam object.  Assumes an mgcv model of the form gam(... + s(g, bs='re'))." />
 a gam object.  Assumes an mgcv model of the form <code>gam(... + s(g, bs='re'))</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extract_ranef</span>(<span class='no'>model</span>, <span class='kw'>re</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tibble</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>extract_ranef</span>(<span class='no'>model</span>, <span class='kw'>re</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ci_level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>The mgcv model</p></td>
+      <td><p>A gam or bam model</p></td>
     </tr>
     <tr>
       <th>re</th>
-      <td><p>Which specific coefficients to extract. Currently not
-implemented.</p></td>
+      <td><p>Filter results to a specific random effect/grouping variable.</p></td>
     </tr>
     <tr>
-      <th>tibble</th>
-      <td><p>Return a tibble or standard default data.frame.  Default is
-<code>TRUE</code>.</p></td>
+      <th>ci_level</th>
+      <td><p>Level for the confidence interval. Must be between 0 and 1.</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>Rounding for the output.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>tibble</code> (if <code>tibble = TRUE</code>) or data frame with the random effect,
+    <p>A <code>tibble</code> or data frame with the random effect,
 its standard error, and its lower and upper bounds. The bounds are based
 on a simple normal approximation using the standard error.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Returns a data frame of the the <code>component</code> type, the estimated
 random effect <code>re</code>, the estimated <code>se</code>, and approximate <code>lower</code> and <code>upper</code>
-bounds assuming  <code>+- 1.96*se</code>.  Note that the standard errors are Bayesian
+bounds.  Note that the standard errors are Bayesian
 estimates (see <code><a href='https://rdrr.io/pkg/mgcv/man/gamObject.html'>gamObject</a></code>, specifically type <code>Vp</code>).  The <code>re</code>
 will only reflect smooth terms whose basis function is 're', i.e. of class
 <code>random.effect</code>.  Others will be ignored.</p>
@@ -200,20 +202,20 @@ a reason why you'd use that given your other options with <code>mgcv</code>.</p>
 #&gt; 371   0.9057286  -1.0053150
 #&gt; 372  12.4213189   1.2584805
 #&gt; 
-#&gt; with conditional variances for “Subject” </div><div class='input'><span class='fu'>extract_ranef</span>(<span class='no'>ga_model</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 36 x 6</span><span>
-#&gt;    component group      re    se  lower upper
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Subject   308     1.51   13.3 -</span><span style='color: #BB0000;'>24.5</span><span>   27.5
-#&gt; </span><span style='color: #555555;'> 2</span><span> Subject   309   -</span><span style='color: #BB0000;'>40.4</span><span>    13.3 -</span><span style='color: #BB0000;'>66.4</span><span>  -</span><span style='color: #BB0000;'>14.3</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span> Subject   310   -</span><span style='color: #BB0000;'>39.2</span><span>    13.3 -</span><span style='color: #BB0000;'>65.2</span><span>  -</span><span style='color: #BB0000;'>13.2</span><span>
-#&gt; </span><span style='color: #555555;'> 4</span><span> Subject   330    24.5    13.3  -</span><span style='color: #BB0000;'>1.51</span><span>  50.5
-#&gt; </span><span style='color: #555555;'> 5</span><span> Subject   331    22.9    13.3  -</span><span style='color: #BB0000;'>3.11</span><span>  48.9
-#&gt; </span><span style='color: #555555;'> 6</span><span> Subject   332     9.22   13.3 -</span><span style='color: #BB0000;'>16.8</span><span>   35.2
-#&gt; </span><span style='color: #555555;'> 7</span><span> Subject   333    17.2    13.3  -</span><span style='color: #BB0000;'>8.87</span><span>  43.2
-#&gt; </span><span style='color: #555555;'> 8</span><span> Subject   334    -</span><span style='color: #BB0000;'>7.45</span><span>   13.3 -</span><span style='color: #BB0000;'>33.5</span><span>   18.6
-#&gt; </span><span style='color: #555555;'> 9</span><span> Subject   335     0.579  13.3 -</span><span style='color: #BB0000;'>25.4</span><span>   26.6
-#&gt; </span><span style='color: #555555;'>10</span><span> Subject   337    34.8    13.3   8.74  60.8
-#&gt; </span><span style='color: #555555;'># … with 26 more rows</span><span></div></span></pre>
+#&gt; with conditional variances for "Subject" </div><div class='input'><span class='fu'>extract_ranef</span>(<span class='no'>ga_model</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 36 x 7</span><span>
+#&gt;    group_var effect    group   value    se lower_2.5 upper_97.5
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Subject   Intercept 308     1.51   13.3    -</span><span style='color: #BB0000;'>24.5</span><span>        27.5
+#&gt; </span><span style='color: #555555;'> 2</span><span> Subject   Intercept 309   -</span><span style='color: #BB0000;'>40.4</span><span>    13.3    -</span><span style='color: #BB0000;'>66.4</span><span>       -</span><span style='color: #BB0000;'>14.3</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> Subject   Intercept 310   -</span><span style='color: #BB0000;'>39.2</span><span>    13.3    -</span><span style='color: #BB0000;'>65.2</span><span>       -</span><span style='color: #BB0000;'>13.2</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> Subject   Intercept 330    24.5    13.3     -</span><span style='color: #BB0000;'>1.51</span><span>       50.5
+#&gt; </span><span style='color: #555555;'> 5</span><span> Subject   Intercept 331    22.9    13.3     -</span><span style='color: #BB0000;'>3.11</span><span>       48.9
+#&gt; </span><span style='color: #555555;'> 6</span><span> Subject   Intercept 332     9.22   13.3    -</span><span style='color: #BB0000;'>16.8</span><span>        35.2
+#&gt; </span><span style='color: #555555;'> 7</span><span> Subject   Intercept 333    17.2    13.3     -</span><span style='color: #BB0000;'>8.87</span><span>       43.2
+#&gt; </span><span style='color: #555555;'> 8</span><span> Subject   Intercept 334    -</span><span style='color: #BB0000;'>7.45</span><span>   13.3    -</span><span style='color: #BB0000;'>33.5</span><span>        18.6
+#&gt; </span><span style='color: #555555;'> 9</span><span> Subject   Intercept 335     0.579  13.3    -</span><span style='color: #BB0000;'>25.4</span><span>        26.6
+#&gt; </span><span style='color: #555555;'>10</span><span> Subject   Intercept 337    34.8    13.3      8.74       60.8
+#&gt; </span><span style='color: #555555;'># ... with 26 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

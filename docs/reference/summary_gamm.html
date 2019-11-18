@@ -183,10 +183,10 @@ but should work with just about any gam with a smooth term.</p>
 #&gt; Correlation of Fixed Effects:
 #&gt;      (Intr)
 #&gt; Days -0.184</div><div class='input'><span class='fu'>summary_gamm</span>(<span class='no'>ga_model</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Variance components:</span></div><div class='output co'>#&gt;     component std.dev  lower  upper variance proportion
-#&gt;       Subject  25.051 16.085 39.015  627.571      0.477
-#&gt;  Days|Subject   5.988  4.025  8.908   35.858      0.027
-#&gt;         scale  25.565 22.792 28.676  653.582      0.496</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Variance components:</span></div><div class='output co'>#&gt;     group    effect variance     sd sd_2.5 sd_97.5 var_prop
+#&gt;   Subject Intercept  627.571 25.051 16.085  39.015    0.477
+#&gt;   Subject      Days   35.858  5.988  4.025   8.908    0.027
+#&gt;  Residual            653.582 25.565 22.792  28.676    0.496</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>Fixed Effects:</span></div><div class='output co'>#&gt;         Term Estimate Std. Error t value Pr(&gt;|t|)
 #&gt;  (Intercept)  251.405      6.885  36.513    0.000
