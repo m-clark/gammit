@@ -1,3 +1,6 @@
+# gammit 0.3.1
+* Refactor and extend most functions as done in mixedup
+
 # gammit 0.3.0
 * Build package website.
 
