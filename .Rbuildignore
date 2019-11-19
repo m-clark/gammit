@@ -1,11 +1,11 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
-^\.travis\.yml$
-^codecov\.yml$
-^README\.Rmd$
-^appveyor\.yml$
-^_pkgdown\.yml$
 ^code-of-conduct\.md$
+^LICENSE\.md$
+^README\.Rmd$
+^\.github$
+^\.travis\.yml$
+^appveyor\.yml$
+^codecov\.yml$
 docs
 pkgdown

@@ -1,43 +1,77 @@
-context('test extract random effects')
-
-ga_model = mgcv::gam(Reaction ~  Days + s(Subject, bs='re') + s(Days, Subject, bs='re'),
-                     data = lme4::sleepstudy,
-                     method = 'REML')
-
-test_that('Works on single lme model', {
-  expect_s3_class(extract_ranef(ga_model), 'data.frame')
-})
+context('test extract_ranef')
 
 test_that('Fails with non-gam', {
   expect_error(extract_ranef(lm(mpg ~ wt, mtcars)))
 })
 
-
-
-ss2 = lme4::sleepstudy %>%
-  dplyr::mutate(id = factor(rep(rev(letters[1:10]), e=18)))
-
-ga_model_2gr = mgcv::gam(Reaction ~  Days +
-                           s(Subject, bs='re') +
-                           s(Days, Subject, bs='re') +
-                           s(id, bs = 're'),
-                         data = ss2,
-                         method = 'REML')
-
-test_that('Works on multiple re lme model', {
-  expect_s3_class(extract_ranef(ga_model_2gr), 'data.frame')
+test_that('extract_ranef.gam basic functionality', {
+  expect_s3_class(extract_ranef(gam_1), 'data.frame')
 })
 
+test_that('extract_ranef.gam basic functionality', {
+  expect_s3_class(extract_ranef(gam_2), 'data.frame')
+})
 
+test_that('extract_vc.gam basic functionality: bam', {
+  expect_s3_class(extract_ranef(bam_1), 'data.frame')
+})
+
+test_that('extract_ranef.gam works with multiple re', {
+  expect_equal(
+    nrow(extract_ranef(gam_3, re = 's')),
+    nlevels(gam_3$model$s)
+  )
+})
+
+test_that('extract_ranef.gam errors with bad re name', {
+  expect_error(extract_ranef(gam_2, re = 'subject'))
+})
+
+test_that('extract_ranef.gam errors with only non-factor random effects',
+          {
+            d = mgcv::gamSim(n = 100, verbose = FALSE)
+            m = mgcv::gam(y ~ s(x1, bs = 're'), data = d)
+            expect_error(suppressWarnings(extract_ranef(m)))
+          })
+
+test_that('extract_ranef.gam warns with non-factor random effects', {
+  set.seed(4)
+  d = mgcv::gamSim(n = 100, verbose = FALSE)
+  nb <- 10; n <- 100
+  b <- rnorm(nb) * 2 ## random effect
+  r <- sample(1:nb, n, replace = TRUE) ## r.e. levels
+  y <- 2 + b[r] + rnorm(n)
+  r <- factor(r)
+  m = mgcv::gam(y ~ s(x1, bs = 're') + s(r, bs = 're'),
+                data = cbind(d, r),
+                method = 'REML')
+  expect_warning(extract_ranef(m))
+})
+
+test_that('Fails if no factors', {
+
+  ga_model_num_re = mgcv::gam(Reaction ~  s(Days) + s(Subject, bs='re') + s(Days, Subject, bs='re'),
+                              data = within(lme4::sleepstudy, {Subject = as.integer(Subject)}),
+                              method = 'REML')
+
+  expect_error(suppressWarnings(extract_ranef(ga_model_num_re)))
+
+})
+
+test_that('extract_ranef.brmsfit correct output', {
+  expect_equal(
+    nrow(extract_ranef(gam_2, re = 'Subject')),
+    nlevels(lme4::sleepstudy$Subject)*2
+  )
+})
 
 
 test_that('Ranef reflect lme4', {
   lmer_re = unlist(lme4::ranef(lme4::lmer(Reaction ~  Days
-                                          + (Days || Subject)
-                                          + (1|id),
-                              data=ss2)))
+                                          + (Days || Subject),
+                              data=lme4::sleepstudy)))
 
-  cor_re = cor(lmer_re, extract_ranef(ga_model_2gr)$value)
+  cor_re = cor(lmer_re, extract_ranef(gam_2)$value)
   expect_gt(cor_re, .99)
 })
 
@@ -61,3 +95,4 @@ test_that('Fails if RE is no factors', {
   expect_error(suppressWarnings(extract_ranef(ga_model_num_re)))
 
 })
+

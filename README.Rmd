@@ -1,7 +1,7 @@
 ---
 output: 
   github_document:
-    toc: true
+    toc: false # doesn't show well on website, where it isn't really needed
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/m-clark/gammit.svg?branch=master)](https://travis-ci.org/m-clark/gammit)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/m-clark/gammit?branch=master&svg=true)](https://ci.appveyor.com/project/m-clark/gammit)
 [![Codecov test coverage](https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg)](https://codecov.io/gh/m-clark/gammit?branch=master)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 ## Introduction
