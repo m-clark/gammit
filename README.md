@@ -3,6 +3,18 @@
 
 # gammit
 
+This package was specifically for mixed models using mgcv. At present it
+has been almost entirely superseded by the
+[mixedup](https://m-clark.github.io/mixedup/) package, which provides
+all the same functionality and more, while the visualizations were
+originally from the [visibly](https://m-clark.github.io/visibly/)
+package anyway. That only leaves the prediction functionality as unique
+to this package, so I leave it here as I may still use it for that, and
+I’m contemplating moving the GAM specific visuals from visibly at some
+point.
+
+# Package Description
+
 <!-- badges: start -->
 
 [![Travis build
@@ -12,7 +24,7 @@ status](https://ci.appveyor.com/api/projects/status/github/m-clark/gammit?branch
 [![Codecov test
 coverage](https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg)](https://codecov.io/gh/m-clark/gammit?branch=master)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+superseded](https://img.shields.io/badge/lifecycle-superseded-orange.svg)](https://www.tidyverse.org/lifecycle/#superseded)
 <!-- badges: end -->
 
 ## Introduction
@@ -59,7 +71,7 @@ model.
 ``` r
 library(mgcv)
 Loading required package: nlme
-This is mgcv 1.8-30. For overview type 'help("mgcv-package")'.
+This is mgcv 1.8-31. For overview type 'help("mgcv-package")'.
 library(lme4)
 Loading required package: Matrix
 
@@ -84,19 +96,19 @@ REML criterion at convergence: 1743.7
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.9626 -0.4626  0.0204  0.4653  5.1860 
+-3.9626 -0.4625  0.0204  0.4653  5.1860 
 
 Random effects:
  Groups    Name        Variance Std.Dev.
- Subject   (Intercept) 627.50   25.050  
- Subject.1 Days         35.86    5.989  
+ Subject   (Intercept) 627.57   25.051  
+ Subject.1 Days         35.86    5.988  
  Residual              653.58   25.565  
 Number of obs: 180, groups:  Subject, 18
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept)  251.405      6.885  36.514
-Days          10.467      1.560   6.711
+(Intercept)  251.405      6.885  36.513
+Days          10.467      1.560   6.712
 
 Correlation of Fixed Effects:
      (Intr)
@@ -124,9 +136,9 @@ Extract the variance components with
 ``` r
 data.frame(VarCorr(lmer_model))
         grp        var1 var2      vcov     sdcor
-1   Subject (Intercept) <NA> 627.49997 25.049949
-2 Subject.1        Days <NA>  35.86395  5.988652
-3  Residual        <NA> <NA> 653.57996 25.565210
+1   Subject (Intercept) <NA> 627.56905 25.051328
+2 Subject.1        Days <NA>  35.85838  5.988187
+3  Residual        <NA> <NA> 653.58350 25.565279
 
 
 extract_vc(ga_model)
@@ -143,24 +155,24 @@ Extract the random effects with
 ranef(lmer_model)
 $Subject
     (Intercept)        Days
-308   1.5116973   9.3237308
-309 -40.3720066  -8.5995358
-310 -39.1795117  -5.3880715
-330  24.5188072  -4.9686809
-331  22.9141930  -3.1939310
-332   9.2217762  -0.3084673
-333  17.1557243  -0.2871512
-334  -7.4516633   1.1159907
-335   0.5798353 -10.9062401
-337  34.7661741   8.6279628
-349 -25.7538155   1.2806250
-350 -13.8653871   6.7565202
-351   4.9161750  -3.0751926
-352  20.9281601   3.5123758
-369   3.2584763   0.8730848
-370 -26.4756822   4.9838147
-371   0.9057286  -1.0053150
-372  12.4213189   1.2584805
+308   1.5126648   9.3234970
+309 -40.3738728  -8.5991757
+310 -39.1810279  -5.3877944
+330  24.5189244  -4.9686503
+331  22.9144470  -3.1939378
+332   9.2219759  -0.3084939
+333  17.1561243  -0.2872078
+334  -7.4517382   1.1159911
+335   0.5787623 -10.9059754
+337  34.7679030   8.6276228
+349 -25.7543312   1.2806892
+350 -13.8650598   6.7564064
+351   4.9159912  -3.0751356
+352  20.9290332   3.5122123
+369   3.2586448   0.8730514
+370 -26.4758468   4.9837910
+371   0.9056510  -1.0052938
+372  12.4217547   1.2584037
 
 with conditional variances for "Subject" 
 
@@ -179,7 +191,7 @@ extract_ranef(ga_model)
  8 Subject   Intercept 334    -7.45   13.3    -33.5        18.6
  9 Subject   Intercept 335     0.579  13.3    -25.4        26.6
 10 Subject   Intercept 337    34.8    13.3      8.74       60.8
-# ... with 26 more rows
+# … with 26 more rows
 ```
 
 Extract the fixed effects

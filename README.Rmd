@@ -16,11 +16,16 @@ knitr::opts_chunk$set(
 ```
 # gammit
 
+This package was specifically for mixed models using mgcv. At present it has been almost entirely superseded by the [mixedup](https://m-clark.github.io/mixedup/) package, which provides all the same functionality and more, while the visualizations were originally from the [visibly](https://m-clark.github.io/visibly/) package anyway.  That only leaves the prediction functionality as unique to this package, so I leave it here as I may still use it for that, and I'm contemplating moving the GAM specific visuals from visibly at some point.
+
+
+# Package Description
+
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/m-clark/gammit.svg?branch=master)](https://travis-ci.org/m-clark/gammit)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/m-clark/gammit?branch=master&svg=true)](https://ci.appveyor.com/project/m-clark/gammit)
 [![Codecov test coverage](https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg)](https://codecov.io/gh/m-clark/gammit?branch=master)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-orange.svg)](https://www.tidyverse.org/lifecycle/#superseded)
 <!-- badges: end -->
 
 ## Introduction
