@@ -33,10 +33,10 @@
 extract_fixed <- function(
   model,
   ci_level = .95,
-  digits = 3
+  digits = 3,
+  ...
 ) {
-  fe <- data.frame(summary(model)$p.table)
-
+  fe <- data.frame(summary(model, ...)$p.table)
   colnames(fe) =  c('value', 'se', 't', 'p')
 
   # no confint.gam
