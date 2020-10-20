@@ -35,7 +35,7 @@ extract_fixed <- function(
   ci_level = .95,
   digits = 3
 ) {
-  fe <- data.frame(summary(model)$p.table)
+  fe <- data.frame(summary(model, re.test = FALSE)$p.table)
 
   colnames(fe) =  c('value', 'se', 't', 'p')
 
