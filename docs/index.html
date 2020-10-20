@@ -6,20 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Using Generalized Additive Mixed Models • gammit</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Using Generalized Additive Mixed Models">
 <meta property="og:description" content="The goal of gammit is to provide a set of functions to aid using mgcv (possibly solely) for mixed models.">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">gammit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -70,11 +70,17 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div id="gammit" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#gammit" class="anchor"></a>gammit</h1></div>
+<p>This package was specifically for mixed models using mgcv. At present it has been almost entirely superseded by the <a href="https://m-clark.github.io/mixedup/">mixedup</a> package, which provides all the same functionality and more, while the visualizations were originally from the <a href="https://m-clark.github.io/visibly/">visibly</a> package anyway. That only leaves the prediction functionality as unique to this package, so I leave it here as I may still use it for that, and I’m contemplating moving the GAM specific visuals from visibly at some point.</p>
+</div>
+<div id="package-description" class="section level1">
+<h1 class="hasAnchor">
+<a href="#package-description" class="anchor"></a>Package Description</h1>
 <!-- badges: start -->
-
+<p><a href="https://travis-ci.org/m-clark/gammit"><img src="https://travis-ci.org/m-clark/gammit.svg?branch=master" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/m-clark/gammit"><img src="https://ci.appveyor.com/api/projects/status/github/m-clark/gammit?branch=master&amp;svg=true" alt="AppVeyor build status"></a> <a href="https://codecov.io/gh/m-clark/gammit?branch=master"><img src="https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://www.tidyverse.org/lifecycle/#superseded"><img src="https://img.shields.io/badge/lifecycle-superseded-orange.svg" alt="Lifecycle: superseded"></a> <!-- badges: end --></p>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -85,185 +91,188 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"m-clark/gammit"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># install.packages("devtools")</span>
+<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"m-clark/gammit"</span>)
+</pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This example demonstrates the <span class="func" style="">summary_gamm</span> function with comparison to the corresponding <span class="pack" style="">lme4</span> model.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mgcv)</a>
-<a class="sourceLine" id="cb2-2" title="2">Loading required package<span class="op">:</span><span class="st"> </span>nlme</a>
-<a class="sourceLine" id="cb2-3" title="3">This is mgcv <span class="fl">1.8-30.</span> For overview type <span class="st">'help("mgcv-package")'</span>.</a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(lme4)</a>
-<a class="sourceLine" id="cb2-5" title="5">Loading required package<span class="op">:</span><span class="st"> </span>Matrix</a>
-<a class="sourceLine" id="cb2-6" title="6"></a>
-<a class="sourceLine" id="cb2-7" title="7">Attaching package<span class="op">:</span><span class="st"> 'lme4'</span></a>
-<a class="sourceLine" id="cb2-8" title="8">The following object is masked from <span class="st">'package:nlme'</span><span class="op">:</span></a>
-<a class="sourceLine" id="cb2-9" title="9"></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="st">    </span>lmList</a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(gammit)</a>
-<a class="sourceLine" id="cb2-12" title="12"></a>
-<a class="sourceLine" id="cb2-13" title="13">lmer_model =<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st">  </span>Days <span class="op">+</span><span class="st"> </span>(Days <span class="op">||</span><span class="st"> </span>Subject), <span class="dt">data=</span>sleepstudy)</a>
-<a class="sourceLine" id="cb2-14" title="14"></a>
-<a class="sourceLine" id="cb2-15" title="15">ga_model =<span class="st"> </span><span class="kw">gam</span>(Reaction <span class="op">~</span><span class="st">  </span>Days <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Subject, <span class="dt">bs=</span><span class="st">'re'</span>) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Days, Subject, <span class="dt">bs=</span><span class="st">'re'</span>),</a>
-<a class="sourceLine" id="cb2-16" title="16">               <span class="dt">data=</span>sleepstudy,</a>
-<a class="sourceLine" id="cb2-17" title="17">               <span class="dt">method =</span> <span class="st">'REML'</span>)</a>
-<a class="sourceLine" id="cb2-18" title="18"></a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(lmer_model)</a>
-<a class="sourceLine" id="cb2-20" title="20">Linear mixed model fit by REML [<span class="st">'lmerMod'</span>]</a>
-<a class="sourceLine" id="cb2-21" title="21">Formula<span class="op">:</span><span class="st"> </span>Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>Days <span class="op">|</span><span class="st"> </span>Subject))</a>
-<a class="sourceLine" id="cb2-22" title="22">   Data<span class="op">:</span><span class="st"> </span>sleepstudy</a>
-<a class="sourceLine" id="cb2-23" title="23"></a>
-<a class="sourceLine" id="cb2-24" title="24">REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">1743.7</span></a>
-<a class="sourceLine" id="cb2-25" title="25"></a>
-<a class="sourceLine" id="cb2-26" title="26">Scaled residuals<span class="op">:</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-27" title="27"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="fl">-3.9626</span> <span class="fl">-0.4626</span>  <span class="fl">0.0204</span>  <span class="fl">0.4653</span>  <span class="fl">5.1860</span> </a>
-<a class="sourceLine" id="cb2-29" title="29"></a>
-<a class="sourceLine" id="cb2-30" title="30">Random effects<span class="op">:</span></a>
-<a class="sourceLine" id="cb2-31" title="31"><span class="st"> </span>Groups    Name        Variance Std.Dev.</a>
-<a class="sourceLine" id="cb2-32" title="32"> <span class="kw">Subject</span>   (Intercept) <span class="fl">627.50</span>   <span class="fl">25.050</span>  </a>
-<a class="sourceLine" id="cb2-33" title="33"> Subject<span class="fl">.1</span> Days         <span class="fl">35.86</span>    <span class="fl">5.989</span>  </a>
-<a class="sourceLine" id="cb2-34" title="34"> Residual              <span class="fl">653.58</span>   <span class="fl">25.565</span>  </a>
-<a class="sourceLine" id="cb2-35" title="35">Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">180</span>, groups<span class="op">:</span><span class="st">  </span>Subject, <span class="dv">18</span></a>
-<a class="sourceLine" id="cb2-36" title="36"></a>
-<a class="sourceLine" id="cb2-37" title="37">Fixed effects<span class="op">:</span></a>
-<a class="sourceLine" id="cb2-38" title="38"><span class="st">            </span>Estimate Std. Error t value</a>
-<a class="sourceLine" id="cb2-39" title="39">(Intercept)  <span class="fl">251.405</span>      <span class="fl">6.885</span>  <span class="fl">36.514</span></a>
-<a class="sourceLine" id="cb2-40" title="40">Days          <span class="fl">10.467</span>      <span class="fl">1.560</span>   <span class="fl">6.711</span></a>
-<a class="sourceLine" id="cb2-41" title="41"></a>
-<a class="sourceLine" id="cb2-42" title="42">Correlation of Fixed Effects<span class="op">:</span></a>
-<a class="sourceLine" id="cb2-43" title="43"><span class="st">     </span>(Intr)</a>
-<a class="sourceLine" id="cb2-44" title="44">Days <span class="fl">-0.184</span></a>
-<a class="sourceLine" id="cb2-45" title="45"></a>
-<a class="sourceLine" id="cb2-46" title="46"></a>
-<a class="sourceLine" id="cb2-47" title="47"><span class="kw"><a href="reference/summary_gamm.html">summary_gamm</a></span>(ga_model)</a>
-<a class="sourceLine" id="cb2-48" title="48"></a>
-<a class="sourceLine" id="cb2-49" title="49">Variance components<span class="op">:</span></a>
-<a class="sourceLine" id="cb2-50" title="50"><span class="st">    </span>group    effect variance     sd sd_<span class="fl">2.5</span> sd_<span class="fl">97.5</span> var_prop</a>
-<a class="sourceLine" id="cb2-51" title="51">  Subject Intercept  <span class="fl">627.571</span> <span class="fl">25.051</span> <span class="fl">16.085</span>  <span class="fl">39.015</span>    <span class="fl">0.477</span></a>
-<a class="sourceLine" id="cb2-52" title="52">  Subject      Days   <span class="fl">35.858</span>  <span class="fl">5.988</span>  <span class="fl">4.025</span>   <span class="fl">8.908</span>    <span class="fl">0.027</span></a>
-<a class="sourceLine" id="cb2-53" title="53"> Residual            <span class="fl">653.582</span> <span class="fl">25.565</span> <span class="fl">22.792</span>  <span class="fl">28.676</span>    <span class="fl">0.496</span></a>
-<a class="sourceLine" id="cb2-54" title="54"></a>
-<a class="sourceLine" id="cb2-55" title="55"></a>
-<a class="sourceLine" id="cb2-56" title="56">Fixed Effects<span class="op">:</span></a>
-<a class="sourceLine" id="cb2-57" title="57"><span class="st">        </span>Term Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)</a>
-<a class="sourceLine" id="cb2-58" title="58"> (Intercept)  <span class="fl">251.405</span>      <span class="fl">6.885</span>  <span class="fl">36.513</span>    <span class="fl">0.000</span></a>
-<a class="sourceLine" id="cb2-59" title="59">        Days   <span class="fl">10.467</span>      <span class="fl">1.560</span>   <span class="fl">6.712</span>    <span class="fl">0.000</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(mgcv)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>Loading required package<span class="op">:</span><span class="st"> </span>nlme</span>
+<span id="cb2-3"><a href="#cb2-3"></a>This is mgcv <span class="fl">1.8-31.</span> For overview type <span class="st">'help("mgcv-package")'</span>.</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>Loading required package<span class="op">:</span><span class="st"> </span>Matrix</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>Attaching package<span class="op">:</span><span class="st"> 'lme4'</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>The following object is masked from <span class="st">'package:nlme'</span><span class="op">:</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="st">    </span>lmList</span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">library</span>(gammit)</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>lmer_model =<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st">  </span>Days <span class="op">+</span><span class="st"> </span>(Days <span class="op">||</span><span class="st"> </span>Subject), <span class="dt">data=</span>sleepstudy)</span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a>ga_model =<span class="st"> </span><span class="kw">gam</span>(Reaction <span class="op">~</span><span class="st">  </span>Days <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Subject, <span class="dt">bs=</span><span class="st">'re'</span>) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Days, Subject, <span class="dt">bs=</span><span class="st">'re'</span>),</span>
+<span id="cb2-16"><a href="#cb2-16"></a>               <span class="dt">data=</span>sleepstudy,</span>
+<span id="cb2-17"><a href="#cb2-17"></a>               <span class="dt">method =</span> <span class="st">'REML'</span>)</span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="kw">summary</span>(lmer_model)</span>
+<span id="cb2-20"><a href="#cb2-20"></a>Linear mixed model fit by REML [<span class="st">'lmerMod'</span>]</span>
+<span id="cb2-21"><a href="#cb2-21"></a>Formula<span class="op">:</span><span class="st"> </span>Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>Days <span class="op">|</span><span class="st"> </span>Subject))</span>
+<span id="cb2-22"><a href="#cb2-22"></a>   Data<span class="op">:</span><span class="st"> </span>sleepstudy</span>
+<span id="cb2-23"><a href="#cb2-23"></a></span>
+<span id="cb2-24"><a href="#cb2-24"></a>REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">1743.7</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a></span>
+<span id="cb2-26"><a href="#cb2-26"></a>Scaled residuals<span class="op">:</span><span class="st"> </span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="st">    </span>Min      1Q  Median      3Q     Max </span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="fl">-3.9626</span> <span class="fl">-0.4625</span>  <span class="fl">0.0204</span>  <span class="fl">0.4653</span>  <span class="fl">5.1860</span> </span>
+<span id="cb2-29"><a href="#cb2-29"></a></span>
+<span id="cb2-30"><a href="#cb2-30"></a>Random effects<span class="op">:</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="st"> </span>Groups    Name        Variance Std.Dev.</span>
+<span id="cb2-32"><a href="#cb2-32"></a> <span class="kw">Subject</span>   (Intercept) <span class="fl">627.57</span>   <span class="fl">25.051</span>  </span>
+<span id="cb2-33"><a href="#cb2-33"></a> Subject<span class="fl">.1</span> Days         <span class="fl">35.86</span>    <span class="fl">5.988</span>  </span>
+<span id="cb2-34"><a href="#cb2-34"></a> Residual              <span class="fl">653.58</span>   <span class="fl">25.565</span>  </span>
+<span id="cb2-35"><a href="#cb2-35"></a>Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">180</span>, groups<span class="op">:</span><span class="st">  </span>Subject, <span class="dv">18</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a></span>
+<span id="cb2-37"><a href="#cb2-37"></a>Fixed effects<span class="op">:</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="st">            </span>Estimate Std. Error t value</span>
+<span id="cb2-39"><a href="#cb2-39"></a>(Intercept)  <span class="fl">251.405</span>      <span class="fl">6.885</span>  <span class="fl">36.513</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a>Days          <span class="fl">10.467</span>      <span class="fl">1.560</span>   <span class="fl">6.712</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a></span>
+<span id="cb2-42"><a href="#cb2-42"></a>Correlation of Fixed Effects<span class="op">:</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a><span class="st">     </span>(Intr)</span>
+<span id="cb2-44"><a href="#cb2-44"></a>Days <span class="fl">-0.184</span></span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
+<span id="cb2-46"><a href="#cb2-46"></a></span>
+<span id="cb2-47"><a href="#cb2-47"></a><span class="kw">summary_gamm</span>(ga_model)</span>
+<span id="cb2-48"><a href="#cb2-48"></a></span>
+<span id="cb2-49"><a href="#cb2-49"></a>Variance components<span class="op">:</span></span>
+<span id="cb2-50"><a href="#cb2-50"></a><span class="st">    </span>group    effect variance     sd sd_<span class="fl">2.5</span> sd_<span class="fl">97.5</span> var_prop</span>
+<span id="cb2-51"><a href="#cb2-51"></a>  Subject Intercept  <span class="fl">627.571</span> <span class="fl">25.051</span> <span class="fl">16.085</span>  <span class="fl">39.015</span>    <span class="fl">0.477</span></span>
+<span id="cb2-52"><a href="#cb2-52"></a>  Subject      Days   <span class="fl">35.858</span>  <span class="fl">5.988</span>  <span class="fl">4.025</span>   <span class="fl">8.908</span>    <span class="fl">0.027</span></span>
+<span id="cb2-53"><a href="#cb2-53"></a> Residual            <span class="fl">653.582</span> <span class="fl">25.565</span> <span class="fl">22.792</span>  <span class="fl">28.676</span>    <span class="fl">0.496</span></span>
+<span id="cb2-54"><a href="#cb2-54"></a></span>
+<span id="cb2-55"><a href="#cb2-55"></a></span>
+<span id="cb2-56"><a href="#cb2-56"></a>Fixed Effects<span class="op">:</span></span>
+<span id="cb2-57"><a href="#cb2-57"></a><span class="st">        </span>Term Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)</span>
+<span id="cb2-58"><a href="#cb2-58"></a> (Intercept)  <span class="fl">251.405</span>      <span class="fl">6.885</span>  <span class="fl">36.513</span>    <span class="fl">0.000</span></span>
+<span id="cb2-59"><a href="#cb2-59"></a>        Days   <span class="fl">10.467</span>      <span class="fl">1.560</span>   <span class="fl">6.712</span>    <span class="fl">0.000</span></span></code></pre></div>
 <p>Extract the variance components with <span class="func" style="">extract_vc</span>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">VarCorr</span>(lmer_model))</a>
-<a class="sourceLine" id="cb3-2" title="2">        grp        var1 var2      vcov     sdcor</a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="dv">1</span>   <span class="kw">Subject</span> (Intercept) <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st"> </span><span class="fl">627.49997</span> <span class="fl">25.049949</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="dv">2</span> Subject<span class="fl">.1</span>        Days <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">  </span><span class="fl">35.86395</span>  <span class="fl">5.988652</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="dv">3</span>  Residual        <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st"> </span><span class="fl">653.57996</span> <span class="fl">25.565210</span></a>
-<a class="sourceLine" id="cb3-6" title="6"></a>
-<a class="sourceLine" id="cb3-7" title="7"></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="kw"><a href="reference/extract_vc.html">extract_vc</a></span>(ga_model)</a>
-<a class="sourceLine" id="cb3-9" title="9">     group    effect variance     sd sd_<span class="fl">2.5</span> sd_<span class="fl">97.5</span> var_prop</a>
-<a class="sourceLine" id="cb3-10" title="10"><span class="dv">1</span>  Subject Intercept  <span class="fl">627.571</span> <span class="fl">25.051</span> <span class="fl">16.085</span>  <span class="fl">39.015</span>    <span class="fl">0.477</span></a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="dv">2</span>  Subject      Days   <span class="fl">35.858</span>  <span class="fl">5.988</span>  <span class="fl">4.025</span>   <span class="fl">8.908</span>    <span class="fl">0.027</span></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="dv">3</span> Residual            <span class="fl">653.582</span> <span class="fl">25.565</span> <span class="fl">22.792</span>  <span class="fl">28.676</span>    <span class="fl">0.496</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">data.frame</span>(<span class="kw">VarCorr</span>(lmer_model))</span>
+<span id="cb3-2"><a href="#cb3-2"></a>        grp        var1 var2      vcov     sdcor</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="dv">1</span>   <span class="kw">Subject</span> (Intercept) <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st"> </span><span class="fl">627.56905</span> <span class="fl">25.051328</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="dv">2</span> Subject<span class="fl">.1</span>        Days <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">  </span><span class="fl">35.85838</span>  <span class="fl">5.988187</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="dv">3</span>  Residual        <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st"> </span><span class="fl">653.58350</span> <span class="fl">25.565279</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">extract_vc</span>(ga_model)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>     group    effect variance     sd sd_<span class="fl">2.5</span> sd_<span class="fl">97.5</span> var_prop</span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="dv">1</span>  Subject Intercept  <span class="fl">627.571</span> <span class="fl">25.051</span> <span class="fl">16.085</span>  <span class="fl">39.015</span>    <span class="fl">0.477</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="dv">2</span>  Subject      Days   <span class="fl">35.858</span>  <span class="fl">5.988</span>  <span class="fl">4.025</span>   <span class="fl">8.908</span>    <span class="fl">0.027</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="dv">3</span> Residual            <span class="fl">653.582</span> <span class="fl">25.565</span> <span class="fl">22.792</span>  <span class="fl">28.676</span>    <span class="fl">0.496</span></span></code></pre></div>
 <p>Extract the random effects with <span class="func" style="">extract_ranef</span>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">ranef</span>(lmer_model)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="op">$</span>Subject</a>
-<a class="sourceLine" id="cb4-3" title="3">    (Intercept)        Days</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="dv">308</span>   <span class="fl">1.5116973</span>   <span class="fl">9.3237308</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="dv">309</span> <span class="fl">-40.3720066</span>  <span class="fl">-8.5995358</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="dv">310</span> <span class="fl">-39.1795117</span>  <span class="fl">-5.3880715</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="dv">330</span>  <span class="fl">24.5188072</span>  <span class="fl">-4.9686809</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="dv">331</span>  <span class="fl">22.9141930</span>  <span class="fl">-3.1939310</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="dv">332</span>   <span class="fl">9.2217762</span>  <span class="fl">-0.3084673</span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="dv">333</span>  <span class="fl">17.1557243</span>  <span class="fl">-0.2871512</span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="dv">334</span>  <span class="fl">-7.4516633</span>   <span class="fl">1.1159907</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="dv">335</span>   <span class="fl">0.5798353</span> <span class="fl">-10.9062401</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="dv">337</span>  <span class="fl">34.7661741</span>   <span class="fl">8.6279628</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="dv">349</span> <span class="fl">-25.7538155</span>   <span class="fl">1.2806250</span></a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="dv">350</span> <span class="fl">-13.8653871</span>   <span class="fl">6.7565202</span></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="dv">351</span>   <span class="fl">4.9161750</span>  <span class="fl">-3.0751926</span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="dv">352</span>  <span class="fl">20.9281601</span>   <span class="fl">3.5123758</span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="dv">369</span>   <span class="fl">3.2584763</span>   <span class="fl">0.8730848</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="dv">370</span> <span class="fl">-26.4756822</span>   <span class="fl">4.9838147</span></a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="dv">371</span>   <span class="fl">0.9057286</span>  <span class="fl">-1.0053150</span></a>
-<a class="sourceLine" id="cb4-21" title="21"><span class="dv">372</span>  <span class="fl">12.4213189</span>   <span class="fl">1.2584805</span></a>
-<a class="sourceLine" id="cb4-22" title="22"></a>
-<a class="sourceLine" id="cb4-23" title="23">with conditional variances <span class="cf">for</span> <span class="st">"Subject"</span> </a>
-<a class="sourceLine" id="cb4-24" title="24"></a>
-<a class="sourceLine" id="cb4-25" title="25"></a>
-<a class="sourceLine" id="cb4-26" title="26"><span class="kw"><a href="reference/extract_ranef.html">extract_ranef</a></span>(ga_model)</a>
-<a class="sourceLine" id="cb4-27" title="27"><span class="co"># A tibble: 36 x 7</span></a>
-<a class="sourceLine" id="cb4-28" title="28">   group_var effect    group   value    se lower_<span class="fl">2.5</span> upper_<span class="fl">97.5</span></a>
-<a class="sourceLine" id="cb4-29" title="29">   <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb4-30" title="30"><span class="st"> </span><span class="dv">1</span> Subject   Intercept <span class="dv">308</span>     <span class="fl">1.51</span>   <span class="fl">13.3</span>    <span class="fl">-24.5</span>        <span class="fl">27.5</span></a>
-<a class="sourceLine" id="cb4-31" title="31"> <span class="dv">2</span> Subject   Intercept <span class="dv">309</span>   <span class="fl">-40.4</span>    <span class="fl">13.3</span>    <span class="fl">-66.4</span>       <span class="fl">-14.3</span></a>
-<a class="sourceLine" id="cb4-32" title="32"> <span class="dv">3</span> Subject   Intercept <span class="dv">310</span>   <span class="fl">-39.2</span>    <span class="fl">13.3</span>    <span class="fl">-65.2</span>       <span class="fl">-13.2</span></a>
-<a class="sourceLine" id="cb4-33" title="33"> <span class="dv">4</span> Subject   Intercept <span class="dv">330</span>    <span class="fl">24.5</span>    <span class="fl">13.3</span>     <span class="fl">-1.51</span>       <span class="fl">50.5</span></a>
-<a class="sourceLine" id="cb4-34" title="34"> <span class="dv">5</span> Subject   Intercept <span class="dv">331</span>    <span class="fl">22.9</span>    <span class="fl">13.3</span>     <span class="fl">-3.11</span>       <span class="fl">48.9</span></a>
-<a class="sourceLine" id="cb4-35" title="35"> <span class="dv">6</span> Subject   Intercept <span class="dv">332</span>     <span class="fl">9.22</span>   <span class="fl">13.3</span>    <span class="fl">-16.8</span>        <span class="fl">35.2</span></a>
-<a class="sourceLine" id="cb4-36" title="36"> <span class="dv">7</span> Subject   Intercept <span class="dv">333</span>    <span class="fl">17.2</span>    <span class="fl">13.3</span>     <span class="fl">-8.87</span>       <span class="fl">43.2</span></a>
-<a class="sourceLine" id="cb4-37" title="37"> <span class="dv">8</span> Subject   Intercept <span class="dv">334</span>    <span class="fl">-7.45</span>   <span class="fl">13.3</span>    <span class="fl">-33.5</span>        <span class="fl">18.6</span></a>
-<a class="sourceLine" id="cb4-38" title="38"> <span class="dv">9</span> Subject   Intercept <span class="dv">335</span>     <span class="fl">0.579</span>  <span class="fl">13.3</span>    <span class="fl">-25.4</span>        <span class="fl">26.6</span></a>
-<a class="sourceLine" id="cb4-39" title="39"><span class="dv">10</span> Subject   Intercept <span class="dv">337</span>    <span class="fl">34.8</span>    <span class="fl">13.3</span>      <span class="fl">8.74</span>       <span class="fl">60.8</span></a>
-<a class="sourceLine" id="cb4-40" title="40"><span class="co"># ... with 26 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">ranef</span>(lmer_model)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="op">$</span>Subject</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    (Intercept)        Days</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="dv">308</span>   <span class="fl">1.5126648</span>   <span class="fl">9.3234970</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dv">309</span> <span class="fl">-40.3738728</span>  <span class="fl">-8.5991757</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="dv">310</span> <span class="fl">-39.1810279</span>  <span class="fl">-5.3877944</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="dv">330</span>  <span class="fl">24.5189244</span>  <span class="fl">-4.9686503</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="dv">331</span>  <span class="fl">22.9144470</span>  <span class="fl">-3.1939378</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="dv">332</span>   <span class="fl">9.2219759</span>  <span class="fl">-0.3084939</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="dv">333</span>  <span class="fl">17.1561243</span>  <span class="fl">-0.2872078</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="dv">334</span>  <span class="fl">-7.4517382</span>   <span class="fl">1.1159911</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="dv">335</span>   <span class="fl">0.5787623</span> <span class="fl">-10.9059754</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="dv">337</span>  <span class="fl">34.7679030</span>   <span class="fl">8.6276228</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="dv">349</span> <span class="fl">-25.7543312</span>   <span class="fl">1.2806892</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="dv">350</span> <span class="fl">-13.8650598</span>   <span class="fl">6.7564064</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="dv">351</span>   <span class="fl">4.9159912</span>  <span class="fl">-3.0751356</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="dv">352</span>  <span class="fl">20.9290332</span>   <span class="fl">3.5122123</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="dv">369</span>   <span class="fl">3.2586448</span>   <span class="fl">0.8730514</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="dv">370</span> <span class="fl">-26.4758468</span>   <span class="fl">4.9837910</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="dv">371</span>   <span class="fl">0.9056510</span>  <span class="fl">-1.0052938</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="dv">372</span>  <span class="fl">12.4217547</span>   <span class="fl">1.2584037</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a></span>
+<span id="cb4-23"><a href="#cb4-23"></a>with conditional variances <span class="cf">for</span> <span class="st">"Subject"</span> </span>
+<span id="cb4-24"><a href="#cb4-24"></a></span>
+<span id="cb4-25"><a href="#cb4-25"></a></span>
+<span id="cb4-26"><a href="#cb4-26"></a><span class="kw">extract_ranef</span>(ga_model)</span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="co"># A tibble: 36 x 7</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a>   group_var effect    group   value    se lower_<span class="fl">2.5</span> upper_<span class="fl">97.5</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a>   <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="st"> </span><span class="dv">1</span> Subject   Intercept <span class="dv">308</span>     <span class="fl">1.51</span>   <span class="fl">13.3</span>    <span class="fl">-24.5</span>        <span class="fl">27.5</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a> <span class="dv">2</span> Subject   Intercept <span class="dv">309</span>   <span class="fl">-40.4</span>    <span class="fl">13.3</span>    <span class="fl">-66.4</span>       <span class="fl">-14.3</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a> <span class="dv">3</span> Subject   Intercept <span class="dv">310</span>   <span class="fl">-39.2</span>    <span class="fl">13.3</span>    <span class="fl">-65.2</span>       <span class="fl">-13.2</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a> <span class="dv">4</span> Subject   Intercept <span class="dv">330</span>    <span class="fl">24.5</span>    <span class="fl">13.3</span>     <span class="fl">-1.51</span>       <span class="fl">50.5</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a> <span class="dv">5</span> Subject   Intercept <span class="dv">331</span>    <span class="fl">22.9</span>    <span class="fl">13.3</span>     <span class="fl">-3.11</span>       <span class="fl">48.9</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a> <span class="dv">6</span> Subject   Intercept <span class="dv">332</span>     <span class="fl">9.22</span>   <span class="fl">13.3</span>    <span class="fl">-16.8</span>        <span class="fl">35.2</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a> <span class="dv">7</span> Subject   Intercept <span class="dv">333</span>    <span class="fl">17.2</span>    <span class="fl">13.3</span>     <span class="fl">-8.87</span>       <span class="fl">43.2</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a> <span class="dv">8</span> Subject   Intercept <span class="dv">334</span>    <span class="fl">-7.45</span>   <span class="fl">13.3</span>    <span class="fl">-33.5</span>        <span class="fl">18.6</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a> <span class="dv">9</span> Subject   Intercept <span class="dv">335</span>     <span class="fl">0.579</span>  <span class="fl">13.3</span>    <span class="fl">-25.4</span>        <span class="fl">26.6</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="dv">10</span> Subject   Intercept <span class="dv">337</span>    <span class="fl">34.8</span>    <span class="fl">13.3</span>      <span class="fl">8.74</span>       <span class="fl">60.8</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co"># … with 26 more rows</span></span></code></pre></div>
 <p>Extract the fixed effects <span class="func" style="">extract_fixef</span>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">fixef</span>(lmer_model)</a>
-<a class="sourceLine" id="cb5-2" title="2">(Intercept)        Days </a>
-<a class="sourceLine" id="cb5-3" title="3">  <span class="fl">251.40510</span>    <span class="fl">10.46729</span> </a>
-<a class="sourceLine" id="cb5-4" title="4"></a>
-<a class="sourceLine" id="cb5-5" title="5"></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="kw"><a href="reference/extract_fixed.html">extract_fixed</a></span>(ga_model)</a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co"># A tibble: 2 x 7</span></a>
-<a class="sourceLine" id="cb5-8" title="8">  term      value    se     t     p lower_<span class="fl">2.5</span> upper_<span class="fl">97.5</span></a>
-<a class="sourceLine" id="cb5-9" title="9">  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="dv">1</span> Intercept <span class="fl">251.</span>   <span class="fl">6.88</span> <span class="fl">36.5</span>      <span class="dv">0</span>    <span class="fl">238.</span>        <span class="fl">265.</span> </a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="dv">2</span> Days       <span class="fl">10.5</span>  <span class="fl">1.56</span>  <span class="fl">6.71</span>     <span class="dv">0</span>      <span class="fl">7.39</span>       <span class="fl">13.5</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">fixef</span>(lmer_model)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>(Intercept)        Days </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fl">251.40510</span>    <span class="fl">10.46729</span> </span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">extract_fixed</span>(ga_model)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># A tibble: 2 x 7</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  term      value    se     t     p lower_<span class="fl">2.5</span> upper_<span class="fl">97.5</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="dv">1</span> Intercept <span class="fl">251.</span>   <span class="fl">6.88</span> <span class="fl">36.5</span>      <span class="dv">0</span>    <span class="fl">238.</span>        <span class="fl">265.</span> </span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="dv">2</span> Days       <span class="fl">10.5</span>  <span class="fl">1.56</span>  <span class="fl">6.71</span>     <span class="dv">0</span>      <span class="fl">7.39</span>       <span class="fl">13.5</span></span></code></pre></div>
 </div>
 <div id="prediction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prediction" class="anchor"></a>Prediction</h2>
 <p>There are a couple of ways to do prediction, and the main goal for gammit was to make it easy to use the <span class="pack" style="">lme4</span> style to include random effects or not. <span class="pack" style="">mgcv</span> already has this functionality as well, so the functionality of <span class="func" style="">predict_gamm</span> is mostly cosmetic. One benefit here is to provide standard errors for the prediction also.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw"><a href="reference/predict_gamm.html">predict_gamm</a></span>(ga_model))</a>
-<a class="sourceLine" id="cb6-2" title="2">  prediction</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="dv">1</span>   <span class="fl">252.9178</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="dv">2</span>   <span class="fl">272.7086</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="dv">3</span>   <span class="fl">292.4994</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="dv">4</span>   <span class="fl">312.2901</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="dv">5</span>   <span class="fl">332.0809</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="dv">6</span>   <span class="fl">351.8717</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">head</span>(<span class="kw">predict_gamm</span>(ga_model))</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  prediction</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="dv">1</span>   <span class="fl">252.9178</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="dv">2</span>   <span class="fl">272.7086</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="dv">3</span>   <span class="fl">292.4994</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="dv">4</span>   <span class="fl">312.2901</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="dv">5</span>   <span class="fl">332.0809</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="dv">6</span>   <span class="fl">351.8717</span></span></code></pre></div>
 <p>Add standard errors.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw"><a href="reference/predict_gamm.html">predict_gamm</a></span>(ga_model, <span class="dt">se=</span>T)))</a>
-<a class="sourceLine" id="cb7-2" title="2">  prediction        se</a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="dv">1</span>   <span class="fl">252.9178</span> <span class="fl">12.410220</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="dv">2</span>   <span class="fl">272.7086</span> <span class="fl">10.660891</span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="dv">3</span>   <span class="fl">292.4994</span>  <span class="fl">9.191224</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="dv">4</span>   <span class="fl">312.2901</span>  <span class="fl">8.153871</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="dv">5</span>   <span class="fl">332.0809</span>  <span class="fl">7.724998</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="dv">6</span>   <span class="fl">351.8717</span>  <span class="fl">8.003034</span></a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">compare =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">gam_original  =</span> <span class="kw"><a href="reference/predict_gamm.html">predict_gamm</a></span>(ga_model)<span class="op">$</span>prediction,</a>
-<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">gam_fe_only   =</span> <span class="kw"><a href="reference/predict_gamm.html">predict_gamm</a></span>(ga_model, <span class="dt">re_form =</span> <span class="ot">NA</span>)<span class="op">$</span>prediction,</a>
-<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">gam_fe_only2  =</span> <span class="kw"><a href="reference/predict_gamm.html">predict_gamm</a></span>(ga_model, </a>
-<a class="sourceLine" id="cb8-5" title="5">                               <span class="dt">exclude =</span>  <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'s(Subject)'</span>, <span class="st">"s(Days,Subject)"</span>))<span class="op">$</span>prediction,</a>
-<a class="sourceLine" id="cb8-6" title="6">  <span class="dt">lme4_fe_only  =</span> <span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(lmer_model, <span class="dt">re.form =</span> <span class="ot">NA</span>))</a>
-<a class="sourceLine" id="cb8-7" title="7"></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(compare)</a>
-<a class="sourceLine" id="cb8-9" title="9">  gam_original gam_fe_only gam_fe_only2 lme4_fe_only</a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="dv">1</span>     <span class="fl">252.9178</span>    <span class="fl">251.4051</span>     <span class="fl">251.4051</span>     <span class="fl">251.4051</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="dv">2</span>     <span class="fl">272.7086</span>    <span class="fl">261.8724</span>     <span class="fl">261.8724</span>     <span class="fl">261.8724</span></a>
-<a class="sourceLine" id="cb8-12" title="12"><span class="dv">3</span>     <span class="fl">292.4994</span>    <span class="fl">272.3397</span>     <span class="fl">272.3397</span>     <span class="fl">272.3397</span></a>
-<a class="sourceLine" id="cb8-13" title="13"><span class="dv">4</span>     <span class="fl">312.2901</span>    <span class="fl">282.8070</span>     <span class="fl">282.8070</span>     <span class="fl">282.8070</span></a>
-<a class="sourceLine" id="cb8-14" title="14"><span class="dv">5</span>     <span class="fl">332.0809</span>    <span class="fl">293.2742</span>     <span class="fl">293.2742</span>     <span class="fl">293.2742</span></a>
-<a class="sourceLine" id="cb8-15" title="15"><span class="dv">6</span>     <span class="fl">351.8717</span>    <span class="fl">303.7415</span>     <span class="fl">303.7415</span>     <span class="fl">303.7415</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">head</span>(<span class="kw">data.frame</span>(<span class="kw">predict_gamm</span>(ga_model, <span class="dt">se=</span>T)))</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  prediction        se</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="dv">1</span>   <span class="fl">252.9178</span> <span class="fl">12.410220</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="dv">2</span>   <span class="fl">272.7086</span> <span class="fl">10.660891</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="dv">3</span>   <span class="fl">292.4994</span>  <span class="fl">9.191224</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="dv">4</span>   <span class="fl">312.2901</span>  <span class="fl">8.153871</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="dv">5</span>   <span class="fl">332.0809</span>  <span class="fl">7.724998</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="dv">6</span>   <span class="fl">351.8717</span>  <span class="fl">8.003034</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>compare =<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">gam_original  =</span> <span class="kw">predict_gamm</span>(ga_model)<span class="op">$</span>prediction,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="dt">gam_fe_only   =</span> <span class="kw">predict_gamm</span>(ga_model, <span class="dt">re_form =</span> <span class="ot">NA</span>)<span class="op">$</span>prediction,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="dt">gam_fe_only2  =</span> <span class="kw">predict_gamm</span>(ga_model, </span>
+<span id="cb8-5"><a href="#cb8-5"></a>                               <span class="dt">exclude =</span>  <span class="kw">c</span>(<span class="st">'s(Subject)'</span>, <span class="st">"s(Days,Subject)"</span>))<span class="op">$</span>prediction,</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="dt">lme4_fe_only  =</span> <span class="kw">predict</span>(lmer_model, <span class="dt">re.form =</span> <span class="ot">NA</span>))</span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">head</span>(compare)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>  gam_original gam_fe_only gam_fe_only2 lme4_fe_only</span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="dv">1</span>     <span class="fl">252.9178</span>    <span class="fl">251.4051</span>     <span class="fl">251.4051</span>     <span class="fl">251.4051</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="dv">2</span>     <span class="fl">272.7086</span>    <span class="fl">261.8724</span>     <span class="fl">261.8724</span>     <span class="fl">261.8724</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="dv">3</span>     <span class="fl">292.4994</span>    <span class="fl">272.3397</span>     <span class="fl">272.3397</span>     <span class="fl">272.3397</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="dv">4</span>     <span class="fl">312.2901</span>    <span class="fl">282.8070</span>     <span class="fl">282.8070</span>     <span class="fl">282.8070</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="dv">5</span>     <span class="fl">332.0809</span>    <span class="fl">293.2742</span>     <span class="fl">293.2742</span>     <span class="fl">293.2742</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="dv">6</span>     <span class="fl">351.8717</span>    <span class="fl">303.7415</span>     <span class="fl">303.7415</span>     <span class="fl">303.7415</span></span></code></pre></div>
 <p>Along with that, one can still use include/exclude for other smooth terms as above. Unfortunately, some options do not yet work with <span class="objclass" style="">bam</span> objects, but this is to due to the functionality in <span class="func" style="">predict.gam</span> from <span class="pack" style="">mgcv</span> and should change in the near future.</p>
 </div>
 </div>
+
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/m-clark/gammit">https://​github.com/​m-clark/​gammit</a>
+<li>Browse source code at <br><a href="https://github.com/m-clark/gammit/">https://​github.com/​m-clark/​gammit/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/m-clark/gammit/issues">https://​github.com/​m-clark/​gammit/​issues</a>
 </li>
@@ -286,16 +295,7 @@
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://travis-ci.org/m-clark/gammit"><img src="https://travis-ci.org/m-clark/gammit.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://ci.appveyor.com/project/m-clark/gammit"><img src="https://ci.appveyor.com/api/projects/status/github/m-clark/gammit?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
-<li><a href="https://codecov.io/gh/m-clark/gammit?branch=master"><img src="https://codecov.io/gh/m-clark/gammit/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-</ul>
-</div>
-</div>
+  </div>
 </div>
 
 
@@ -304,7 +304,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

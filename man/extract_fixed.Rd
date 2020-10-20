@@ -4,7 +4,7 @@
 \alias{extract_fixed}
 \title{Extract the fixed effects from a GAMM}
 \usage{
-extract_fixed(model, ci_level = 0.95, digits = 3)
+extract_fixed(model, ci_level = 0.95, digits = 3, ...)
 }
 \arguments{
 \item{model}{A gam or bam model}
@@ -12,6 +12,8 @@ extract_fixed(model, ci_level = 0.95, digits = 3)
 \item{ci_level}{Level for the confidence interval. Must be between 0 and 1.}
 
 \item{digits}{Rounding for the output.}
+
+\item{...}{Passed to summary.gam, e.g. to set re.test = FALSE.}
 }
 \value{
 A \code{data.frame} with the coefficients, standard error, and upper

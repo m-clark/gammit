@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -40,7 +44,6 @@
 <meta property="og:title" content="Extract random effects from a gam — extract_ranef" />
 <meta property="og:description" content="Extract what would be the random effects from a mixed model from
 a gam object.  Assumes an mgcv model of the form gam(... + s(g, bs='re'))." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -58,7 +61,7 @@ a gam object.  Assumes an mgcv model of the form gam(... + s(g, bs='re'))." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +75,7 @@ a gam object.  Assumes an mgcv model of the form gam(... + s(g, bs='re'))." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gammit</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -118,10 +121,10 @@ a gam object.  Assumes an mgcv model of the form gam(... + s(g, bs='re'))." />
 
     <div class="ref-description">
     <p>Extract what would be the random effects from a mixed model from
-a gam object.  Assumes an mgcv model of the form <code>gam(... + s(g, bs='re'))</code>.</p>
+a gam object.  Assumes an mgcv model of the form <code><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>gam(... + s(g, bs='re'))</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extract_ranef</span>(<span class='no'>model</span>, <span class='kw'>re</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ci_level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
+    <pre class="usage"><span class='fu'>extract_ranef</span>(<span class='kw'>model</span>, re = <span class='kw'>NULL</span>, ci_level = <span class='fl'>0.95</span>, digits = <span class='fl'>3</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,37 +175,39 @@ a reason why you'd use that given your other options with <code>mgcv</code>.</p>
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/lme4/man/ranef.html'>ranef</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mgcv</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lme4</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>mgcv</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
 
-<span class='no'>lmer_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='no'>Reaction</span> ~ <span class='no'>Days</span> + (<span class='no'>Days</span> <span class='kw'>||</span> <span class='no'>Subject</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sleepstudy</span>)
-<span class='no'>ga_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>gam</a></span>(<span class='no'>Reaction</span> ~ <span class='no'>Days</span> + <span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/s.html'>s</a></span>(<span class='no'>Subject</span>, <span class='kw'>bs</span> <span class='kw'>=</span> <span class='st'>"re"</span>) + <span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/s.html'>s</a></span>(<span class='no'>Days</span>, <span class='no'>Subject</span>, <span class='kw'>bs</span> <span class='kw'>=</span> <span class='st'>"re"</span>),
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sleepstudy</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"REML"</span>
+<span class='kw'>lmer_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Reaction</span> <span class='op'>~</span> <span class='kw'>Days</span> <span class='op'>+</span> (<span class='kw'>Days</span> <span class='op'>||</span> <span class='kw'>Subject</span>), data = <span class='kw'>sleepstudy</span>)
+<span class='kw'>ga_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/gam.html'>gam</a></span>(<span class='kw'>Reaction</span> <span class='op'>~</span> <span class='kw'>Days</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/s.html'>s</a></span>(<span class='kw'>Subject</span>, bs = <span class='st'>"re"</span>) <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/s.html'>s</a></span>(<span class='kw'>Days</span>, <span class='kw'>Subject</span>, bs = <span class='st'>"re"</span>),
+  data = <span class='kw'>sleepstudy</span>,
+  method = <span class='st'>"REML"</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/ranef.html'>ranef</a></span>(<span class='no'>lmer_model</span>)</div><div class='output co'>#&gt; $Subject
+<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/ranef.html'>ranef</a></span>(<span class='kw'>lmer_model</span>)
+</div><div class='output co'>#&gt; $Subject
 #&gt;     (Intercept)        Days
-#&gt; 308   1.5116973   9.3237308
-#&gt; 309 -40.3720066  -8.5995358
-#&gt; 310 -39.1795117  -5.3880715
-#&gt; 330  24.5188072  -4.9686809
-#&gt; 331  22.9141930  -3.1939310
-#&gt; 332   9.2217762  -0.3084673
-#&gt; 333  17.1557243  -0.2871512
-#&gt; 334  -7.4516633   1.1159907
-#&gt; 335   0.5798353 -10.9062401
-#&gt; 337  34.7661741   8.6279628
-#&gt; 349 -25.7538155   1.2806250
-#&gt; 350 -13.8653871   6.7565202
-#&gt; 351   4.9161750  -3.0751926
-#&gt; 352  20.9281601   3.5123758
-#&gt; 369   3.2584763   0.8730848
-#&gt; 370 -26.4756822   4.9838147
-#&gt; 371   0.9057286  -1.0053150
-#&gt; 372  12.4213189   1.2584805
+#&gt; 308   1.5126648   9.3234970
+#&gt; 309 -40.3738728  -8.5991757
+#&gt; 310 -39.1810279  -5.3877944
+#&gt; 330  24.5189244  -4.9686503
+#&gt; 331  22.9144470  -3.1939378
+#&gt; 332   9.2219759  -0.3084939
+#&gt; 333  17.1561243  -0.2872078
+#&gt; 334  -7.4517382   1.1159911
+#&gt; 335   0.5787623 -10.9059754
+#&gt; 337  34.7679030   8.6276228
+#&gt; 349 -25.7543312   1.2806892
+#&gt; 350 -13.8650598   6.7564064
+#&gt; 351   4.9159912  -3.0751356
+#&gt; 352  20.9290332   3.5122123
+#&gt; 369   3.2586448   0.8730514
+#&gt; 370 -26.4758468   4.9837910
+#&gt; 371   0.9056510  -1.0052938
+#&gt; 372  12.4217547   1.2584037
 #&gt; 
-#&gt; with conditional variances for "Subject" </div><div class='input'><span class='fu'>extract_ranef</span>(<span class='no'>ga_model</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 36 x 7</span><span>
+#&gt; with conditional variances for “Subject” </div><div class='input'><span class='fu'>extract_ranef</span>(<span class='kw'>ga_model</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 36 x 7</span><span>
 #&gt;    group_var effect    group   value    se lower_2.5 upper_97.5
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Subject   Intercept 308     1.51   13.3    -</span><span style='color: #BB0000;'>24.5</span><span>        27.5
@@ -215,19 +220,12 @@ a reason why you'd use that given your other options with <code>mgcv</code>.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span> Subject   Intercept 334    -</span><span style='color: #BB0000;'>7.45</span><span>   13.3    -</span><span style='color: #BB0000;'>33.5</span><span>        18.6
 #&gt; </span><span style='color: #555555;'> 9</span><span> Subject   Intercept 335     0.579  13.3    -</span><span style='color: #BB0000;'>25.4</span><span>        26.6
 #&gt; </span><span style='color: #555555;'>10</span><span> Subject   Intercept 337    34.8    13.3      8.74       60.8
-#&gt; </span><span style='color: #555555;'># ... with 26 more rows</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 26 more rows</span><span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -238,7 +236,7 @@ a reason why you'd use that given your other options with <code>mgcv</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

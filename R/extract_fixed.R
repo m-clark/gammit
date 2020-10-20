@@ -4,6 +4,7 @@
 #' effect parameters.
 #'
 #' @inheritParams extract_vc
+#' @param ... Passed to summary.gam, e.g. to set re.test = FALSE.
 #'
 #'
 #' @details This essentially reproduces the 'parametric' output from

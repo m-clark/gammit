@@ -15,6 +15,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{visibly}{\code{\link[visibly]{plot_gam}}, \code{\link[visibly]{plot_gam_2d}}, \code{\link[visibly]{plot_gam_3d}}, \code{\link[visibly]{plot_gam_by}}, \code{\link[visibly]{plot_gam_check}}}
+  \item{visibly}{\code{\link[visibly]{plot_gam}}, \code{\link[visibly]{plot_gam_2d}}, \code{\link[visibly]{plot_gam_3d}}, \code{\link[visibly:plot_gam_2d]{plot_gam_by}}, \code{\link[visibly]{plot_gam_check}}}
 }}
 

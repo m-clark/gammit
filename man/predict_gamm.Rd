@@ -4,8 +4,16 @@
 \alias{predict_gamm}
 \title{Make predictions with or without random effects}
 \usage{
-predict_gamm(model, newdata, re_form = NULL, se = FALSE,
-  include = NULL, exclude = NULL, keep_prediction_data = FALSE, ...)
+predict_gamm(
+  model,
+  newdata,
+  re_form = NULL,
+  se = FALSE,
+  include = NULL,
+  exclude = NULL,
+  keep_prediction_data = FALSE,
+  ...
+)
 }
 \arguments{
 \item{model}{A gam class model from the \code{\link{mgcv}} package.}
